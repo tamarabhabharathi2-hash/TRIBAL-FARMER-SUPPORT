@@ -1,0 +1,1981 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tribal Farmer Support Portal</title>
+    <link rel="stylesheet" href="style.css">
+
+   <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+     }
+   html{
+      scroll-behavior: smooth;
+}
+ body {
+    background: #f1f6ef;
+    color: #243c2a;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 250px;
+    background: #164d2c;
+    color: white;
+    padding: 25px 15px;
+    position: fixed;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 10;
+}
+
+.sidebar h2 {
+    font-size: 22px;
+    margin-bottom: 3px;
+}
+
+.side-text {
+    color: #b9d8bf;
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    padding: 14px 10px;
+    border-radius: 7px;
+    transition: .3s;
+}
+
+.sidebar a:hover {
+    background: #2b7845;
+    padding-left: 17px;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    color: #d5e9d8;
+    font-size: 13px;
+    padding: 15px 5px;
+}
+
+/* MAIN CONTENT */
+.main {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    padding: 25px;
+}
+
+.topbar {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 12px #0000000d;
+    gap: 15px;
+}
+
+.topbar h2 {
+    color: #185a32;
+}
+
+.topbar p {
+    color: #777;
+    margin-top: 7px;
+}
+
+.profile {
+    background: #e5f4e7;
+    padding: 12px;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+
+.language-btn {
+    border: 1px solid #207b40;
+    background: #207b40;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.registered-list { margin-top: 25px; }
+#registeredDetails { margin-top: 25px; }
+.registered-list h3 { color: #19713b; margin-bottom: 12px; }
+.empty-state { color: #68736a; padding: 15px 0; }
+.unit-row { display:flex; gap:10px; align-items:end; }
+.unit-row > div { flex:1; }
+@media(max-width:700px) { .unit-row { flex-direction:column; align-items:stretch; } }
+
+/* HERO BACKGROUND */
+.hero {
+    margin-top: 25px;
+    min-height: 300px;
+    padding: 45px;
+    display: flex;
+    align-items: center;
+    color: white;
+    border-radius: 15px;
+
+    background:
+    linear-gradient(90deg,
+    rgba(5,45,20,.85),
+    rgba(5,45,20,.25)),
+    url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1600")
+    center/cover;
+}
+
+.hero h1 {
+    font-size: 37px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.hero-btn {
+    display: inline-block;
+    background: #f5bd39;
+    color: #183b23;
+    text-decoration: none;
+    padding: 13px 22px;
+    border-radius: 7px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.hero-btn:hover {
+    background: #ffda76;
+}
+
+/* SECTIONS */
+section {
+    margin-top: 35px;
+    scroll-margin-top: 20px;
+}
+
+/* Different farmer/agriculture photo backgrounds for each portal area */
+#registration, #crops, #market, #schemes, #contact, #registeredDetails {
+    position: relative;
+    padding: 28px;
+    border-radius: 16px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#registration {
+    background-image: linear-gradient(rgba(239,248,239,.62),rgba(239,248,239,.62)),
+      url("https://images.unsplash.com/photo-1592982537447-6f2a6a0a0b2b?w=1400");
+}
+#crops {
+    background-image: linear-gradient(rgba(239,248,239,.60),rgba(239,248,239,.60)),
+      url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1400");
+}
+#market {
+    background-image: linear-gradient(rgba(239,248,239,.62),rgba(239,248,239,.62)),
+      url("https://images.unsplash.com/photo-1542838132-92c53300491e?w=1400");
+}
+#schemes {
+    background-image: linear-gradient(rgba(239,248,239,.62),rgba(239,248,239,.62)),
+      url("https://images.unsplash.com/photo-1523742813660-3e3c5a6b1f4a?w=1400");
+}
+#contact {
+    background-image: linear-gradient(rgba(239,248,239,.62),rgba(239,248,239,.62)),
+      url("https://images.unsplash.com/photo-1472396961693-142e6e269027?w=1400");
+}
+#registeredDetails {
+    background-image: linear-gradient(rgba(239,248,239,.62),rgba(239,248,239,.62)),
+      url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1400");
+}
+#weather {
+    position: relative;
+    padding: 30px;
+    border-radius: 16px;
+    overflow: hidden;
+    background-image: linear-gradient(120deg, rgba(8,35,65,.72), rgba(15,75,105,.42)),
+      url("https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=1600");
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    min-height: 390px;
+}
+#weather .heading { color: #fff; }
+.weather-intro { line-height: 1.6; margin: -8px 0 20px; color: #f1f8ff; }
+.weather-search { display: flex; gap: 10px; flex-wrap: wrap; max-width: 620px; }
+.weather-search input { flex: 1; min-width: 190px; padding: 13px 14px; border: 0; border-radius: 8px; font-size: 15px; }
+.weather-search button { border: 0; border-radius: 8px; padding: 12px 20px; background: #f5bd39; color: #173b50; font-weight: bold; cursor: pointer; }
+.weather-search button:hover { background: #ffda76; }
+.weather-result { margin-top: 22px; max-width: 760px; }
+.weather-status { color: #f4f8fb; margin-bottom: 12px; }
+.weather-grid { display: grid; grid-template-columns: repeat(4, minmax(120px,1fr)); gap: 12px; }
+.weather-card { background: rgba(255,255,255,.92); color: #18384c; padding: 17px 13px; border-radius: 12px; text-align: center; }
+.weather-card span { display: block; font-size: 25px; margin-bottom: 8px; }
+.weather-card strong { display: block; font-size: 21px; margin-top: 6px; }
+.weather-note { margin-top: 14px; font-size: 12px; color: #eef7ff; }
+@media(max-width:850px) { .weather-grid { grid-template-columns: repeat(2,minmax(120px,1fr)); } }
+@media(max-width:480px) { .weather-grid { grid-template-columns: 1fr 1fr; } #weather { padding: 20px; } }
+
+.main > section.view-hidden { display: none; }
+.main > section.view-visible { display: block; }
+
+
+.heading {
+    color: #175b32;
+    font-size: 25px;
+    margin-bottom: 22px;
+}
+
+/* DASHBOARD STATISTICS */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.stat-card {
+    background: white;
+    padding: 23px 15px;
+    border-radius: 12px;
+    text-align: center;
+    border-bottom: 4px solid #329c56;
+    box-shadow: 0 3px 12px #0000000d;
+}
+
+.stat-card span {
+    font-size: 28px;
+}
+
+.stat-card h2 {
+    color: #198044;
+    font-size: 30px;
+    margin: 12px 0;
+}
+
+.stat-card p {
+    color: #68736a;
+    font-size: 14px;
+}
+
+/* CROP CARDS */
+.crop-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.crop-card {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px #0000000d;
+    transition: .3s;
+}
+
+.crop-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 7px 18px #00000018;
+}
+
+.crop-icon {
+    font-size: 35px;
+    margin-bottom: 12px;
+}
+
+.crop-card h3 {
+    color: #19713b;
+    margin-bottom: 12px;
+}
+
+.crop-card p {
+    color: #68736a;
+    line-height: 1.6;
+}
+
+.crop-card a {
+    display: inline-block;
+    margin-top: 12px;
+    color: #16723c;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* REGISTRATION FORM */
+.form-card {
+    background: white;
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px #0000000d;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+    color: #31563a;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d4ddd3;
+    border-radius: 7px;
+    font-size: 15px;
+    outline: none;
+    background: #fcfefc;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #26914b;
+    box-shadow: 0 0 0 2px #26914b22;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+.full {
+    grid-column: 1 / -1;
+}
+
+#submitBtn {
+    margin-top: 20px;
+    width: 100%;
+    background: #207b40;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 7px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#submitBtn:hover {
+    background: #12552b;
+}
+
+#submitBtn:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+#message {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* MARKET TABLE */
+.table-card {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px #0000000d;
+}
+
+.table-scroll {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    min-width: 550px;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 17px;
+    text-align: center;
+    border-bottom: 1px solid #e1e7df;
+}
+
+th {
+    background: #1c6939;
+    color: white;
+}
+
+tr:hover {
+    background: #eff8ef;
+}
+
+.notice {
+    color: #8a6417;
+    margin-top: 17px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* CONTACT */
+.contact-card {
+    background: white;
+    padding: 28px;
+    border-radius: 12px;
+    line-height: 2;
+    box-shadow: 0 3px 12px #0000000d;
+}
+
+.contact-card h3 {
+    color: #207b40;
+    margin-bottom: 10px;
+}
+
+/* FOOTER */
+footer {
+    margin-top: 40px;
+    background: #164d2c;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    line-height: 2;
+    border-radius: 10px;
+}
+
+/* RESPONSIVE DESIGN */
+@media(max-width:1000px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .crop-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width:700px) {
+    .layout {
+        display: block;
+    }
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+        padding: 15px;
+    }
+
+    .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .hero {
+        padding: 28px;
+    }
+
+    .hero h1 {
+        font-size: 29px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full {
+        grid-column: auto;
+    }
+}
+
+@media(max-width:450px) {
+    .stats, .crop-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-card {
+        padding: 18px;
+    }
+}
+
+
+/* Crop detail cards and popup panel */
+#crops {
+    background-image: linear-gradient(rgba(232,248,226,.48),rgba(232,248,226,.48)),
+      url("https://images.unsplash.com/photo-1499527318153-2d9b4c3f4f6d?w=1600");
+}
+.crop-click-note { margin:-10px 0 18px; color:#345d3d; font-weight:bold; }
+.crop-clickable { cursor:pointer; border:2px solid transparent; }
+.crop-clickable:hover, .crop-clickable:focus { border-color:#2b8748; outline:none; }
+.crop-more { display:inline-block; margin-top:10px; font-weight:bold; color:#16723c; text-decoration:none; }
+.crop-detail-panel { margin-top:22px; padding:25px; border-radius:14px; background:rgba(255,255,255,.96); box-shadow:0 5px 18px #00000020; border-left:6px solid #218347; }
+.crop-detail-panel h3 { color:#176637; font-size:24px; margin-bottom:12px; }
+.crop-detail-panel h4 { color:#267345; margin:18px 0 8px; }
+.crop-detail-panel p, .crop-detail-panel li { line-height:1.7; color:#334c38; }
+.crop-detail-panel ul { padding-left:22px; }
+.crop-detail-close { float:right; padding:8px 14px; border:0; border-radius:7px; cursor:pointer; background:#1e713c; color:white; font-weight:bold; }
+
+
+/*    ADDED: COVER PAGE + BUYER PORTAL STYLES (existing styles unchanged)
+    */
+
+/* Cover page  */
+.cover {
+    position: fixed; inset: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; color: #fff; padding: 25px; overflow: auto;
+    background:
+      linear-gradient(120deg, rgba(5,45,20,.84), rgba(5,45,20,.40)),
+      url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1800") center/cover,
+      #164d2c;
+}
+.cover.cover-hidden { display: none; }
+.cover-lang { position: absolute; top: 20px; right: 20px; }
+.cover-inner { max-width: 920px; width: 100%; }
+.cover-logo { font-size: 64px; }
+.cover-inner h1 { font-size: 46px; margin: 10px 0 14px; }
+.cover-inner p { font-size: 18px; line-height: 1.7; max-width: 720px; margin: 0 auto; }
+.cover-pick { margin-top: 30px !important; font-weight: bold; color: #ffda76; }
+.cover-choices { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; margin-top: 18px; }
+.cover-card {
+    width: 290px; border: 0; border-radius: 16px; padding: 28px 20px; cursor: pointer;
+    background: rgba(255,255,255,.93); color: #164d2c; transition: .3s;
+    display: flex; flex-direction: column; gap: 10px; align-items: center;
+}
+.cover-card:hover { transform: translateY(-6px); background: #fff; }
+.cover-ic { font-size: 50px; }
+.cover-card strong { font-size: 25px; }
+.cover-card small { font-size: 14px; color: #4d6a55; line-height: 1.5; }
+.cover-card.buyer { color: #5a3d12; }
+.cover-card.buyer small { color: #7a6038; }
+@media(max-width:600px) { .cover-inner h1 { font-size: 32px; } .cover-card { width: 100%; } }
+
+/* ---- Chips added next to "Farmer" in the farmer dashboard top bar ---- */
+.b-chip {
+    background: #e5f4e7; padding: 12px; border-radius: 25px; font-weight: bold;
+    text-decoration: none; color: inherit; cursor: pointer;
+}
+.b-chip.buyer-chip { background: #f7e7c3; }
+
+/* ---- Buyer portal shell ---- */
+.b-app { display: none; position: fixed; inset: 0; z-index: 900; background: #f6f1e7; overflow-y: auto; color: #3a2a12; }
+.b-app.b-open { display: block; }
+.b-sidebar {
+    width: 250px; background: #3d2b12; color: #fff; padding: 25px 15px;
+    position: fixed; top: 0; left: 0; height: 100vh; overflow-y: auto;
+    display: flex; flex-direction: column; gap: 10px; z-index: 5;
+}
+.b-sidebar h2 { font-size: 22px; margin-bottom: 3px; }
+.b-side-text { color: #e6d2a8; font-size: 13px; margin-bottom: 18px; }
+.b-sidebar a { color: #fff; text-decoration: none; padding: 13px 10px; border-radius: 7px; transition: .3s; cursor: pointer; }
+.b-sidebar a:hover, .b-sidebar a.active { background: #7a5522; padding-left: 17px; }
+.b-userbox { margin-top: auto; background: rgba(255,255,255,.1); border-radius: 10px; padding: 12px; font-size: 13px; line-height: 1.6; color: #f3e6c8; }
+.b-main { margin-left: 250px; padding: 25px; }
+.b-top-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.b-topbar h2 { color: #6b4a14; }
+.b-view {
+    position: relative; margin-top: 25px; padding: 28px; border-radius: 16px; overflow: hidden;
+    background-size: cover; background-position: center; background-repeat: no-repeat; background-color: #efe6d2;
+}
+.b-view.b-hidden { display: none; }
+.b-view .heading { color: #5a3d12; }
+
+/* different photo background for every buyer page */
+#bv-dashboard { background-image: linear-gradient(rgba(250,243,226,.60), rgba(250,243,226,.60)), url("https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1400"); }
+#bv-crops     { background-image: linear-gradient(rgba(240,248,230,.58), rgba(240,248,230,.58)), url("https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1400"); }
+#bv-farmers   { background-image: linear-gradient(rgba(250,243,226,.62), rgba(250,243,226,.62)), url("https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=1400"); }
+#bv-tele      { background-image: linear-gradient(rgba(235,246,240,.62), rgba(235,246,240,.62)), url("https://images.unsplash.com/photo-1472396961693-142e6e269027?w=1400"); }
+#bv-video     { background-image: linear-gradient(rgba(240,240,250,.60), rgba(240,240,250,.60)), url("https://images.unsplash.com/photo-1560493676-04071c5779e1?w=1400"); }
+#bv-contact   { background-image: linear-gradient(rgba(250,243,226,.62), rgba(250,243,226,.62)), url("https://images.unsplash.com/photo-1542838132-92c53300491e?w=1400"); }
+
+#bHero {
+    background:
+      linear-gradient(90deg, rgba(60,35,5,.86), rgba(60,35,5,.30)),
+      url("https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1600") center/cover,
+      #4a3217;
+    margin-top: 0;
+}
+.hero-btn.b-btn { border: 0; cursor: pointer; margin-right: 10px; font-size: 15px; }
+.b-btn-sm { border: 0; background: #1e713c; color: #fff; padding: 10px 16px; border-radius: 7px; cursor: pointer; font-weight: bold; }
+.b-btn-sm:hover { background: #12552b; }
+.b-btn-alt { background: #7a5522; }
+.b-btn-alt:hover { background: #5a3d12; }
+
+/* tabs + login */
+.b-login-card { max-width: 640px; }
+.b-tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.b-tab { border: 1px solid #207b40; background: #fff; color: #207b40; padding: 10px 18px; border-radius: 20px; cursor: pointer; font-weight: bold; }
+.b-tab.active { background: #207b40; color: #fff; }
+.b-submit { margin-top: 20px; width: 100%; background: #207b40; color: #fff; padding: 15px; border: 0; border-radius: 7px; font-size: 16px; font-weight: bold; cursor: pointer; }
+.b-submit:hover { background: #12552b; }
+.b-msg { text-align: center; margin-top: 15px; font-weight: bold; }
+.b-msg.ok { color: #1b7a3f; }
+.b-msg.err { color: #b3261e; }
+.b-note { color: #8a6417; margin-top: 15px; font-size: 13px; line-height: 1.6; }
+
+/* dashboard chips */
+.b-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+.b-pill { background: #e5f4e7; color: #164d2c; padding: 9px 15px; border-radius: 20px; font-weight: bold; }
+.b-summary { margin-top: 22px; background: rgba(255,255,255,.94); padding: 22px; border-radius: 12px; box-shadow: 0 3px 12px #0000000d; }
+.b-summary h3 { color: #19713b; }
+
+/* farmer filter row */
+.b-filter { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+.b-filter > * { flex: 1; min-width: 200px; }
+
+/* helpline card */
+.b-help { background: #fff7dc; border-left: 6px solid #f5bd39; padding: 16px 18px; border-radius: 10px; margin-bottom: 18px; line-height: 1.7; }
+.b-section-gap { margin-top: 24px; }
+.b-section-gap h3 { color: #19713b; margin-bottom: 12px; }
+.b-link { color: #16723c; font-weight: bold; }
+
+@media(max-width:900px) {
+    .b-sidebar { position: relative; width: 100%; height: auto; }
+    .b-userbox { margin-top: 10px; }
+    .b-main { margin-left: 0; padding: 15px; }
+}
+
+/*  ADDED: welcome message on the front page  */
+.cover-welcome { margin-bottom: 6px; }
+.cover-welcome .welcome-badge {
+    display: inline-block; background: #f5bd39; color: #183b23; font-weight: bold;
+    font-size: 26px; padding: 10px 28px; border-radius: 30px; margin-bottom: 14px;
+}
+.cover-welcome .welcome-sub { font-size: 18px; color: #e9f6ea; max-width: 720px; margin: 0 auto 14px; line-height: 1.7; }
+@media(max-width:600px) { .cover-welcome .welcome-badge { font-size: 20px; padding: 8px 20px; } }
+
+/*  Dashboard background = the Rythu (Farmer) portal image  */
+#dashboard, #bv-dashboard {
+    position: relative; padding: 28px; border-radius: 16px; overflow: hidden;
+    background:
+      linear-gradient(rgba(239,248,239,.58), rgba(239,248,239,.58)),
+      url("https://images.unsplash.com/photo-1620901433789-1d2f85a93653?w=1800&fit=crop") center/cover no-repeat,
+      url("https://images.unsplash.com/photo-1530507629858-e4977d30e9e0?w=1800&fit=crop") center/cover no-repeat,
+      url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1800") center/cover no-repeat,
+      #e3f0e3;
+}
+</style>
+</head>
+
+<body>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<!--  COVER PAGE (added)  -->
+<div id="coverPage" class="cover">
+    <button type="button" id="coverLang" class="language-btn cover-lang" aria-label="Change language">తెలుగు</button>
+    <div class="cover-inner">
+        <div class="cover-logo">🌿</div>
+        <div class="cover-welcome">
+            <span class="welcome-badge" data-en="🙏 Welcome! Namaste" data-te="🙏 స్వాగతం! నమస్కారం">🙏 Welcome! Namaste</span>
+            <p class="welcome-sub" data-en="We are happy to have you here. Please choose Farmer or Buyer below to get started."
+               data-te="మిమ్మల్ని ఇక్కడ చూడటం మాకు చాలా సంతోషం. ప్రారంభించడానికి కింద రైతు లేదా కొనుగోలుదారును ఎంచుకోండి.">We are happy to have you here. Please choose Farmer or Buyer below to get started.</p>
+        </div>
+        <h1 data-en="Tribal Farmer Support Portal" data-te="గిరిజన రైతు సహాయ పోర్టల్">Tribal Farmer Support Portal</h1>
+        <p data-en="Connecting tribal farmers and buyers: crop details, market prices, weather, government schemes and expert consultations in one place."
+           data-te="గిరిజన రైతులు మరియు కొనుగోలుదారులను కలుపుతూ: పంట వివరాలు, మార్కెట్ ధరలు, వాతావరణం, ప్రభుత్వ పథకాలు మరియు నిపుణుల సంప్రదింపులు ఒకే చోట.">Connecting tribal farmers and buyers: crop details, market prices, weather, government schemes and expert consultations in one place.</p>
+        <p class="cover-pick" data-en="Choose how you want to continue" data-te="కొనసాగించడానికి ఎంచుకోండి">Choose how you want to continue</p>
+        <div class="cover-choices">
+            <button type="button" class="cover-card" id="coverFarmer">
+                <span class="cover-ic">👨‍🌾</span>
+                <strong data-en="Farmer" data-te="రైతు">Farmer</strong>
+                <small data-en="Registration, crops, market prices, weather and schemes" data-te="నమోదు, పంటలు, మార్కెట్ ధరలు, వాతావరణం మరియు పథకాలు">Registration, crops, market prices, weather and schemes</small>
+            </button>
+            <button type="button" class="cover-card buyer" id="coverBuyer">
+                <span class="cover-ic">🛒</span>
+                <strong data-en="Buyer" data-te="కొనుగోలుదారు">Buyer</strong>
+                <small data-en="Crop details, registered farmers and expert consultations" data-te="పంట వివరాలు, నమోదైన రైతులు మరియు నిపుణుల సంప్రదింపులు">Crop details, registered farmers and expert consultations</small>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!--  BUYER PORTAL (added)  -->
+<div id="buyerApp" class="b-app">
+
+    <!-- BUYER SIDEBAR -->
+    <aside class="b-sidebar">
+        <h2>🛒 <span data-en="Buyer Portal" data-te="కొనుగోలుదారు పోర్టల్">Buyer Portal</span></h2>
+        <p class="b-side-text" data-en="Buyer Support System" data-te="కొనుగోలుదారు సహాయ వ్యవస్థ">Buyer Support System</p>
+
+        <a id="buyerBackSidebar">↩️ <span data-en="Back" data-te="వెనక్కి">Back</span></a>
+        <a data-bview="dashboard">🏠 <span data-en="Dashboard" data-te="డ్యాష్‌బోర్డ్">Dashboard</span></a>
+        <a data-bview="crops">🌾 <span data-en="Crop Details" data-te="పంట వివరాలు">Crop Details</span></a>
+        <a data-bview="buyer-register">📝 <span data-en="Buyer Registration" data-te="కొనుగోలుదారు నమోదు">Buyer Registration</span></a>
+        <a data-bview="buyer-details">📋 <span data-en="Registered Buyer Details" data-te="నమోదైన కొనుగోలుదారుల వివరాలు">Registered Buyer Details</span></a>
+        <a data-bview="farmers">📋 <span data-en="Registered Farmer Details" data-te="నమోదైన రైతుల వివరాలు">Registered Farmer Details</span></a>
+        <a data-bview="tele">📞 <span data-en="Tele Consultation" data-te="టెలి సంప్రదింపు">Tele Consultation</span></a>
+        <a data-bview="video">🎥 <span data-en="Video Consultation" data-te="వీడియో సంప్రదింపు">Video Consultation</span></a>
+        <a data-bview="contact">✉️ <span data-en="Contact Support" data-te="సంప్రదింపు సహాయం">Contact Support</span></a>
+
+    </aside>
+
+    <!-- BUYER MAIN -->
+    <main class="b-main">
+
+        <header class="topbar b-topbar">
+            <div>
+                <h2 data-en="Buyer Dashboard" data-te="కొనుగోలుదారు డ్యాష్‌బోర్డ్">Buyer Dashboard</h2>
+                <p data-en="Welcome to your buyer support portal" data-te="మీ కొనుగోలుదారు సహాయ పోర్టల్‌కు స్వాగతం">Welcome to your buyer support portal</p>
+            </div>
+            <div class="b-top-actions">
+                <button type="button" id="bLang" class="language-btn" aria-label="Change language">తెలుగు</button>
+                <a class="b-chip" id="bToFarmer">🛒 <span data-en="Buyer" data-te="కొనుగోలుదారు">Buyer</span></a>
+                <a class="b-chip" id="bToCover">↩️ <span data-en="Back" data-te="వెనక్కి">Back</span></a>
+            </div>
+        </header>
+
+        <!-- 2. BUYER DASHBOARD -->
+        <section id="bv-dashboard" class="b-view b-hidden">
+            <section class="hero" id="bHero">
+                <div>
+                    <h1 id="bWelcome">Welcome</h1>
+                    <p data-en="Buy directly from tribal farmers. See what crops are registered, check prices and guidance, and talk to agriculture experts by phone or video."
+                       data-te="గిరిజన రైతుల నుండి నేరుగా కొనుగోలు చేయండి. నమోదైన పంటలను చూడండి, ధరలు మరియు సూచనలు తెలుసుకోండి, వ్యవసాయ నిపుణులతో ఫోన్ లేదా వీడియోలో మాట్లాడండి.">Buy directly from tribal farmers. See what crops are registered, check prices and guidance, and talk to agriculture experts by phone or video.</p>
+                    <div>
+                        <button type="button" class="hero-btn b-btn" data-bgo="farmers" data-en="View Registered Farmers" data-te="నమోదైన రైతులను చూడండి">View Registered Farmers</button>
+                        <button type="button" class="hero-btn b-btn" data-bgo="crops" data-en="View Crop Details" data-te="పంట వివరాలు చూడండి">View Crop Details</button>
+                    </div>
+                </div>
+            </section>
+
+            <h2 class="heading b-section-gap" data-en="📊 Buyer Statistics" data-te="📊 కొనుగోలుదారు గణాంకాలు">📊 Buyer Statistics</h2>
+            <div class="stats">
+                <div class="stat-card"><span>👨‍🌾</span><h2 id="bStatFarmers">0</h2><p data-en="Registered Farmers" data-te="నమోదైన రైతులు">Registered Farmers</p></div>
+                <div class="stat-card"><span>🌾</span><h2 id="bStatCrops">0</h2><p data-en="Crop Types Registered" data-te="నమోదైన పంట రకాలు">Crop Types Registered</p></div>
+                <div class="stat-card"><span>🌱</span><h2 id="bStatLand">0</h2><p data-en="Total Land (Acres)" data-te="మొత్తం భూమి (ఎకరాలు)">Total Land (Acres)</p></div>
+                <div class="stat-card"><span>📞</span><h2 id="bStatReq">0</h2><p data-en="Consultation Requests" data-te="సంప్రదింపు అభ్యర్థనలు">Consultation Requests</p></div>
+            </div>
+
+            <div class="b-summary">
+                <h3 data-en="Crops registered by farmers" data-te="రైతులు నమోదు చేసిన పంటలు">Crops registered by farmers</h3>
+                <div class="b-chips" id="bCropSummary"></div>
+                <p id="bNoCropSummary" class="empty-state" data-en="No farmers registered yet." data-te="ఇంకా రైతులు నమోదు కాలేదు.">No farmers registered yet.</p>
+            </div>
+        </section>
+
+        <!-- Buyer Registration and Registered Buyer Details -->
+        <section id="bv-buyer-register" class="b-view b-hidden">
+            <h2 class="heading" data-en="📝 Buyer Registration" data-te="📝 కొనుగోలుదారు నమోదు">📝 Buyer Registration</h2>
+            <div class="form-card"><form id="buyerRegistrationForm"><div class="form-grid">
+                <div><label data-en="Buyer Name / Company" data-te="కొనుగోలుదారు పేరు / కంపెనీ">Buyer Name / Company</label><input id="buyerRegName" required></div>
+                <div><label data-en="Mobile Number" data-te="మొబైల్ నంబర్">Mobile Number</label><input id="buyerRegPhone" type="tel" maxlength="10" pattern="[6-9][0-9]{9}" required></div>
+                <div><label data-en="Village / City" data-te="గ్రామం / నగరం">Village / City</label><input id="buyerRegVillage" required></div>
+                <div><label data-en="District" data-te="జిల్లా">District</label><input id="buyerRegDistrict" required></div>
+                <div class="full"><label data-en="Address" data-te="చిరునామా">Address</label><textarea id="buyerRegAddress" required></textarea></div>
+            </div><button type="submit" class="b-submit" data-en="Submit Buyer Registration" data-te="కొనుగోలుదారు నమోదు చేయండి">Submit Buyer Registration</button><p id="buyerRegMessage" class="b-msg"></p></form></div>
+        </section>
+        <section id="bv-buyer-details" class="b-view b-hidden">
+            <h2 class="heading" data-en="📋 Registered Buyer Details" data-te="📋 నమోదైన కొనుగోలుదారుల వివరాలు">📋 Registered Buyer Details</h2>
+            <div class="form-card"><div class="table-scroll"><table><thead><tr><th>Name</th><th>Mobile</th><th>Village / City</th><th>District</th><th>Address</th></tr></thead><tbody id="registeredBuyersBody"></tbody></table></div><p id="noRegisteredBuyers" class="empty-state">No buyers registered yet.</p></div>
+        </section>
+
+        <!-- 3. BUYER CROP DETAILS -->
+        <section id="bv-crops" class="b-view b-hidden">
+            <h2 class="heading" data-en="🌾 Crop Details" data-te="🌾 పంట వివరాలు">🌾 Crop Details</h2>
+            <p class="crop-click-note" data-en="Click any crop to view details, crop season and price." data-te="వివరాలు, పంట కాలం మరియు ధర తెలుసుకోవడానికి ఏ పంటపై అయినా క్లిక్ చేయండి.">Click any crop to view details, crop season and price.</p>
+            <div class="crop-grid" id="bCropGrid"></div>
+            <div id="bCropPanel" class="crop-detail-panel" style="display:none" aria-live="polite"></div>
+            <p class="notice" data-en="Demonstration prices only. These are sample values, not live mandi rates."
+               data-te="ఇవి నమూనా ధరలు మాత్రమే; ప్రత్యక్ష మార్కెట్ ధరలు కావు.">Demonstration prices only. These are sample values, not live mandi rates.</p>
+        </section>
+
+        <!-- 4. REGISTERED FARMER DETAILS (for buyer) -->
+        <section id="bv-farmers" class="b-view b-hidden">
+            <h2 class="heading" data-en="📋 Registered Farmer Details" data-te="📋 నమోదైన రైతుల వివరాలు">📋 Registered Farmer Details</h2>
+            <div class="form-card">
+                <div class="b-filter">
+                    <input type="text" id="bFarmerSearch" placeholder="Search by name, village or district"
+                           data-ph-en="Search by name, village or district" data-ph-te="పేరు, గ్రామం లేదా జిల్లా ద్వారా వెతకండి">
+                    <select id="bFarmerCrop"></select>
+                </div>
+                <div class="table-scroll">
+                    <table>
+                        <thead><tr>
+                            <th data-en="Farmer Name" data-te="రైతు పేరు">Farmer Name</th>
+                            <th data-en="Mobile" data-te="మొబైల్">Mobile</th>
+                            <th data-en="Village" data-te="గ్రామం">Village</th>
+                            <th data-en="District" data-te="జిల్లా">District</th>
+                            <th data-en="Crop" data-te="పంట">Crop</th>
+                            <th data-en="Land" data-te="భూమి">Land</th>
+                        </tr></thead>
+                        <tbody id="bFarmersBody"></tbody>
+                    </table>
+                </div>
+                <p id="bNoFarmers" class="empty-state" data-en="No farmers registered yet." data-te="ఇంకా రైతులు నమోదు కాలేదు.">No farmers registered yet.</p>
+                <p class="b-note" data-en="Aadhaar numbers are hidden to protect farmer privacy." data-te="రైతుల గోప్యత కోసం ఆధార్ నంబర్లు చూపబడవు.">Aadhaar numbers are hidden to protect farmer privacy.</p>
+            </div>
+        </section>
+
+        <!-- 5. TELE CONSULTATION -->
+        <section id="bv-tele" class="b-view b-hidden">
+            <h2 class="heading" data-en="📞 Tele Consultation" data-te="📞 టెలి సంప్రదింపు">📞 Tele Consultation</h2>
+            <div class="form-card">
+                <div class="b-help">
+                    <strong data-en="Request a phone call from an agriculture expert about crops, quality and prices." data-te="పంటలు, నాణ్యత మరియు ధరల గురించి వ్యవసాయ నిపుణుని నుండి ఫోన్ కాల్ కోసం అభ్యర్థించండి.">Request a phone call from an agriculture expert about crops, quality and prices.</strong><br>
+                    <span data-en="Kisan Call Centre (toll-free): 1800-180-1551" data-te="కిసాన్ కాల్ సెంటర్ (ఉచిత నంబర్): 1800-180-1551">Kisan Call Centre (toll-free): 1800-180-1551</span>
+                </div>
+                <form id="teleForm">
+                    <div class="form-grid">
+                        <div>
+                            <label data-en="Your Name" data-te="మీ పేరు">Your Name</label>
+                            <input type="text" id="tName" required placeholder="Enter your name" data-ph-en="Enter your name" data-ph-te="మీ పేరు నమోదు చేయండి">
+                        </div>
+                        <div>
+                            <label data-en="Mobile Number" data-te="మొబైల్ నంబర్">Mobile Number</label>
+                            <input type="tel" id="tPhone" maxlength="10" pattern="[6-9][0-9]{9}" required placeholder="10 digit mobile number" data-ph-en="10 digit mobile number" data-ph-te="10 అంకెల మొబైల్ నంబర్">
+                        </div>
+                        <div>
+                            <label data-en="Topic" data-te="అంశం">Topic</label>
+                            <select id="tTopic" required>
+                                <option value="" data-en="Choose topic" data-te="అంశాన్ని ఎంచుకోండి">Choose topic</option>
+                                <option value="crop" data-en="Crop Details" data-te="పంట వివరాలు">Crop Details</option>
+                                <option value="price" data-en="Market Price" data-te="మార్కెట్ ధర">Market Price</option>
+                                <option value="quality" data-en="Quality & Quantity" data-te="నాణ్యత & పరిమాణం">Quality & Quantity</option>
+                                <option value="buying" data-en="Buying from Farmers" data-te="రైతుల నుండి కొనుగోలు">Buying from Farmers</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label data-en="Preferred Time" data-te="అనుకూల సమయం">Preferred Time</label>
+                            <select id="tTime" required>
+                                <option value="" data-en="Choose time" data-te="సమయాన్ని ఎంచుకోండి">Choose time</option>
+                                <option value="m" data-en="Morning (9 AM – 12 PM)" data-te="ఉదయం (9 – 12)">Morning (9 AM – 12 PM)</option>
+                                <option value="a" data-en="Afternoon (12 PM – 4 PM)" data-te="మధ్యాహ్నం (12 – 4)">Afternoon (12 PM – 4 PM)</option>
+                                <option value="e" data-en="Evening (4 PM – 7 PM)" data-te="సాయంత్రం (4 – 7)">Evening (4 PM – 7 PM)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label data-en="Call Language" data-te="కాల్ భాష">Call Language</label>
+                            <select id="tLang" required>
+                                <option value="te" data-en="Telugu" data-te="తెలుగు">Telugu</option>
+                                <option value="en" data-en="English" data-te="ఆంగ్లం">English</option>
+                            </select>
+                        </div>
+                        <div class="full">
+                            <label data-en="Message (optional)" data-te="సందేశం (ఐచ్ఛికం)">Message (optional)</label>
+                            <textarea id="tMsg" placeholder="Write your question" data-ph-en="Write your question" data-ph-te="మీ ప్రశ్నను రాయండి"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="b-submit" data-en="Request Call" data-te="కాల్ అభ్యర్థించండి">Request Call</button>
+                    <p id="teleMsgBox" class="b-msg"></p>
+                </form>
+
+                <div class="b-section-gap">
+                    <h3 data-en="My Call Requests" data-te="నా కాల్ అభ్యర్థనలు">My Call Requests</h3>
+                    <div class="table-scroll">
+                        <table>
+                            <thead><tr>
+                                <th data-en="Name" data-te="పేరు">Name</th>
+                                <th data-en="Mobile" data-te="మొబైల్">Mobile</th>
+                                <th data-en="Topic" data-te="అంశం">Topic</th>
+                                <th data-en="Time" data-te="సమయం">Time</th>
+                                <th data-en="Language" data-te="భాష">Language</th>
+                                <th data-en="Status" data-te="స్థితి">Status</th>
+                            </tr></thead>
+                            <tbody id="teleBody"></tbody>
+                        </table>
+                    </div>
+                    <p id="noTele" class="empty-state" data-en="No call requests yet." data-te="ఇంకా కాల్ అభ్యర్థనలు లేవు.">No call requests yet.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. VIDEO CONSULTATION -->
+        <section id="bv-video" class="b-view b-hidden">
+            <h2 class="heading" data-en="🎥 Video Consultation" data-te="🎥 వీడియో సంప్రదింపు">🎥 Video Consultation</h2>
+            <div class="form-card">
+                <div class="b-help">
+                    <strong data-en="Schedule a video consultation, or start an instant video call. Share the same link with the expert so both of you can join." data-te="వీడియో సంప్రదింపును షెడ్యూల్ చేయండి లేదా తక్షణ వీడియో కాల్ ప్రారంభించండి. ఇద్దరూ చేరడానికి అదే లింక్‌ను నిపుణునితో పంచుకోండి.">Schedule a video consultation, or start an instant video call. Share the same link with the expert so both of you can join.</strong>
+                    <div style="margin-top:12px">
+                        <button type="button" class="b-btn-sm b-btn-alt" id="vInstant" data-en="Start Instant Video Call" data-te="తక్షణ వీడియో కాల్ ప్రారంభించండి">Start Instant Video Call</button>
+                    </div>
+                </div>
+                <form id="videoForm">
+                    <div class="form-grid">
+                        <div>
+                            <label data-en="Your Name" data-te="మీ పేరు">Your Name</label>
+                            <input type="text" id="vName" required placeholder="Enter your name" data-ph-en="Enter your name" data-ph-te="మీ పేరు నమోదు చేయండి">
+                        </div>
+                        <div>
+                            <label data-en="Mobile Number" data-te="మొబైల్ నంబర్">Mobile Number</label>
+                            <input type="tel" id="vPhone" maxlength="10" pattern="[6-9][0-9]{9}" required placeholder="10 digit mobile number" data-ph-en="10 digit mobile number" data-ph-te="10 అంకెల మొబైల్ నంబర్">
+                        </div>
+                        <div>
+                            <label data-en="Date" data-te="తేదీ">Date</label>
+                            <input type="date" id="vDate" required>
+                        </div>
+                        <div>
+                            <label data-en="Time" data-te="సమయం">Time</label>
+                            <input type="time" id="vTime" required>
+                        </div>
+                        <div>
+                            <label data-en="Topic" data-te="అంశం">Topic</label>
+                            <select id="vTopic" required>
+                                <option value="" data-en="Choose topic" data-te="అంశాన్ని ఎంచుకోండి">Choose topic</option>
+                                <option value="crop" data-en="Crop Details" data-te="పంట వివరాలు">Crop Details</option>
+                                <option value="price" data-en="Market Price" data-te="మార్కెట్ ధర">Market Price</option>
+                                <option value="quality" data-en="Quality & Quantity" data-te="నాణ్యత & పరిమాణం">Quality & Quantity</option>
+                                <option value="buying" data-en="Buying from Farmers" data-te="రైతుల నుండి కొనుగోలు">Buying from Farmers</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label data-en="Call Language" data-te="కాల్ భాష">Call Language</label>
+                            <select id="vLang" required>
+                                <option value="te" data-en="Telugu" data-te="తెలుగు">Telugu</option>
+                                <option value="en" data-en="English" data-te="ఆంగ్లం">English</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="b-submit" data-en="Schedule Video Consultation" data-te="వీడియో సంప్రదింపు షెడ్యూల్ చేయండి">Schedule Video Consultation</button>
+                    <p id="videoMsgBox" class="b-msg"></p>
+                </form>
+
+                <div class="b-section-gap">
+                    <h3 data-en="My Video Consultations" data-te="నా వీడియో సంప్రదింపులు">My Video Consultations</h3>
+                    <div class="table-scroll">
+                        <table>
+                            <thead><tr>
+                                <th data-en="Name" data-te="పేరు">Name</th>
+                                <th data-en="Date & Time" data-te="తేదీ & సమయం">Date & Time</th>
+                                <th data-en="Topic" data-te="అంశం">Topic</th>
+                                <th data-en="Language" data-te="భాష">Language</th>
+                                <th data-en="Video Link" data-te="వీడియో లింక్">Video Link</th>
+                            </tr></thead>
+                            <tbody id="videoBody"></tbody>
+                        </table>
+                    </div>
+                    <p id="noVideo" class="empty-state" data-en="No video consultations yet." data-te="ఇంకా వీడియో సంప్రదింపులు లేవు.">No video consultations yet.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. CONTACT SUPPORT -->
+        <section id="bv-contact" class="b-view b-hidden">
+            <h2 class="heading" data-en="📞 Contact & Support" data-te="📞 సంప్రదింపు & సహాయం">📞 Contact & Support</h2>
+            <div class="contact-card">
+                <h3 data-en="We are here to support buyers and farmers!" data-te="కొనుగోలుదారులు మరియు రైతులకు సహాయం చేయడానికి మేము సిద్ధంగా ఉన్నాము!">We are here to support buyers and farmers!</h3>
+                <p><span data-en="Email:" data-te="ఈమెయిల్:">Email:</span> <a class="b-link" href="mailto:tamarabhabharathi2@gmail.com">tamarabhabharathi2@gmail.com</a>, <a class="b-link" href="mailto:purnalakshmikatari@gmail.com">purnalakshmikatari@gmail.com</a></p>
+                <p data-en="Location: Andhra Pradesh, India" data-te="ప్రాంతం: ఆంధ్రప్రదేశ్, భారతదేశం">Location: Andhra Pradesh, India</p>
+                <p data-en="Kisan Call Centre (toll-free): 1800-180-1551" data-te="కిసాన్ కాల్ సెంటర్ (ఉచిత నంబర్): 1800-180-1551">Kisan Call Centre (toll-free): 1800-180-1551</p>
+                <p data-en="Contact your local agricultural support centre." data-te="మీ స్థానిక వ్యవసాయ సహాయ కేంద్రాన్ని సంప్రదించండి.">Contact your local agricultural support centre.</p>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 Tribal Farmer Support Portal</p>
+            <p data-en="Buyer Portal | Supporting Agriculture 🌱" data-te="కొనుగోలుదారు పోర్టల్ | వ్యవసాయానికి మద్దతు 🌱">Buyer Portal | Supporting Agriculture 🌱</p>
+        </footer>
+    </main>
+</div>
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2>🌿 <span data-en="Tribal Portal" data-te="గిరిజన పోర్టల్">Tribal Portal</span></h2>
+        <p class="side-text">Farmer Support System</p>
+
+        <a href="#dashboard">🏠 <span data-en="Dashboard" data-te="డ్యాష్‌బోర్డ్">Dashboard</span></a>
+        <a href="#registration">👨‍🌾 <span data-en="Farmer Registration" data-te="రైతు నమోదు">Farmer Registration</span></a>
+        <a href="#registeredDetails">📋 <span data-en="Registered Farmer Details" data-te="నమోదైన రైతుల వివరాలు">Registered Farmer Details</span></a>
+        <a href="#crops">🌾 <span data-en="Crop Details" data-te="పంట వివరాలు">Crop Details</span></a>
+        <a href="#market">💰 <span data-en="Market Prices" data-te="మార్కెట్ ధరలు">Market Prices</span></a>
+        <a href="#weather">🌦️ <span data-en="Weather Reporting" data-te="వాతావరణ సమాచారం">Weather Reporting</span></a>
+        <a href="#schemes">🏛️ <span data-en="Government Schemes" data-te="ప్రభుత్వ పథకాలు">Government Schemes</span></a>
+        <a href="#contact">📞 <span data-en="Contact Support" data-te="సంప్రదింపు సహాయం">Contact Support</span></a>
+
+        <div class="sidebar-bottom">
+            Supporting Tribal Farmers ❤️
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+        <header class="topbar">
+            <div>
+                <h2>Tribal Farmer Dashboard</h2>
+                <p>Welcome to your agricultural support portal</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                <button type="button" id="languageToggle" class="language-btn" aria-label="Change language">తెలుగు</button>
+                <a class="profile" href="#registration" style="text-decoration:none;color:inherit">👨‍🌾 <span data-en="Farmer" data-te="రైతు">Farmer</span></a>
+                <a class="b-chip" id="switchToCover" href="#">↩️ <span data-en="Back" data-te="వెనక్కి">Back</span></a>
+            </div>
+        </header>
+
+        <!-- HOME BANNER -->
+        <section class="hero" id="homeHero">
+            <div>
+                <h1 data-en="Empowering Tribal Farmers" data-te="గిరిజన రైతుల సాధికారత">Empowering Tribal Farmers</h1>
+                <p data-en="Our portal helps tribal farmers access useful crop information, understand market prices, explore government support schemes and register their farm details in one place. We aim to make farming information simple, accessible and helpful for a stronger agricultural future."
+                   data-te="మా పోర్టల్ ద్వారా గిరిజన రైతులు పంటల సమాచారం తెలుసుకోవచ్చు, మార్కెట్ ధరలను అర్థం చేసుకోవచ్చు, ప్రభుత్వ పథకాలను పరిశీలించవచ్చు మరియు తమ వ్యవసాయ వివరాలను ఒకే చోట నమోదు చేసుకోవచ్చు. వ్యవసాయ సమాచారాన్ని సులభంగా అందించి రైతుల అభివృద్ధికి తోడ్పడటమే మా లక్ష్యం.">Our portal helps tribal farmers access useful crop information, understand market prices, explore government support schemes and register their farm details in one place. We aim to make farming information simple, accessible and helpful for a stronger agricultural future.</p>
+                <a href="#registration" class="hero-btn" data-en="Register Now" data-te="ఇప్పుడే నమోదు చేసుకోండి">Register Now</a>
+            </div>
+        </section>
+
+        <!-- DASHBOARD -->
+        <section id="dashboard">
+            <h2 class="heading" data-en="📊 Farmer Statistics" data-te="📊 రైతుల గణాంకాలు">📊 Farmer Statistics</h2>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <span>👨‍🌾</span>
+                    <h2 id="totalFarmers">0</h2>
+                    <p>Total Farmers</p>
+                </div>
+
+                <div class="stat-card">
+                    <span>🌾</span>
+                    <h2 id="totalCrops">0</h2>
+                    <p>Crop Types Registered</p>
+                </div>
+
+                <div class="stat-card">
+                    <span>🌱</span>
+                    <h2 id="totalLand">0</h2>
+                    <p>Total Land (Acres)</p>
+                </div>
+
+                <div class="stat-card">
+                    <span>📋</span>
+                    <h2 id="totalRegistrations">0</h2>
+                    <p>Registrations</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- REGISTRATION -->
+        <section id="registration">
+            <h2 class="heading" data-en="👨‍🌾 Farmer Registration" data-te="👨‍🌾 రైతు నమోదు">👨‍🌾 Farmer Registration</h2>
+
+            <div class="form-card">
+                <form id="farmerForm">
+
+                    <div class="form-grid">
+                        <div>
+                            <label data-en="Farmer Name" data-te="రైతు పేరు">Farmer Name</label>
+                            <input type="text" id="name"
+                                placeholder="Enter farmer name" required>
+                        </div>
+
+                        <div>
+                            <label data-en="Mobile Number" data-te="మొబైల్ నంబర్">Mobile Number</label>
+                            <input type="tel" id="phone"
+                                placeholder="10 digit mobile number"
+                                pattern="[6-9][0-9]{9}" maxlength="10" required>
+                        </div>
+
+                        <div>
+                            <label data-en="Village" data-te="గ్రామం">Village</label>
+                            <input type="text" id="village"
+                                placeholder="Enter village" required>
+                        </div>
+
+                        <div>
+                            <label data-en="District" data-te="జిల్లా">District</label>
+                            <input type="text" id="district"
+                                placeholder="Enter district" required>
+                        </div>
+
+                        <div class="unit-row full">
+                            <div>
+                                <label data-en="Land in Acres or Others" data-te="ఎకరాలు లేదా ఇతర యూనిట్లలో భూమి">Land in Acres or Others</label>
+                                <input type="number" id="land" min="0.01" step="0.01"
+                                    placeholder="Enter land area" required>
+                            </div>
+                            <div>
+                                <label data-en="Aadhaar Number" data-te="ఆధార్ నంబర్">Aadhaar Number</label>
+                                <input type="text" id="aadhaar" inputmode="numeric"
+                                    placeholder="Enter 12 digit Aadhaar number"
+                                    pattern="[0-9]{12}" maxlength="12" required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label data-en="Select Crop" data-te="పంటను ఎంచుకోండి">Select Crop</label>
+                            <select id="crop" required>
+                                <option value="">Choose Crop</option>
+                                <option>Paddy</option>
+                                <option>Maize</option>
+                                <option value="Coffee Bean" data-en="Coffee Bean" data-te="కాఫీ గింజలు">Coffee Bean</option>
+                                <option>Groundnut</option>
+                                <option>Coffee</option>
+                                <option>Millets</option>
+                            </select>
+                        </div>
+
+                        <div class="full">
+                            <label data-en="Full Address" data-te="పూర్తి చిరునామా">Full Address</label>
+                            <textarea id="address"
+                                placeholder="Enter full address" required></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submitBtn" data-en="Submit Registration" data-te="నమోదు సమర్పించండి">
+                        Submit Registration
+                    </button>
+
+                    <p id="message"></p>
+                </form>
+            </div>
+        </section>
+
+        <section id="registeredDetails" class="registered-list">
+                <div class="form-card">
+                <h3 data-en="Registered Farmers Details" data-te="నమోదైన రైతుల వివరాలు">Registered Farmers Details</h3>
+                <div class="table-scroll">
+                    <table>
+                        <thead><tr>
+                            <th data-en="Farmer Name" data-te="రైతు పేరు">Farmer Name</th>
+                            <th data-en="Mobile" data-te="మొబైల్">Mobile</th>
+                            <th data-en="Village" data-te="గ్రామం">Village</th>
+                            <th data-en="District" data-te="జిల్లా">District</th>
+                            <th data-en="Aadhaar" data-te="ఆధార్">Aadhaar</th>
+                            <th data-en="Land" data-te="భూమి">Land</th>
+                            <th data-en="Crop" data-te="పంట">Crop</th>
+                        </tr></thead>
+                        <tbody id="registeredFarmers"></tbody>
+                    </table>
+                </div>
+                <p id="noFarmers" class="empty-state" data-en="No farmers registered yet." data-te="ఇంకా రైతులు నమోదు కాలేదు.">No farmers registered yet.</p>
+                </div>
+        </section>
+
+        <!-- CROP DETAILS -->
+        <section id="crops">
+            <h2 class="heading" data-en="🌾 Agricultural Crop Details" data-te="🌾 వ్యవసాయ పంటల వివరాలు">🌾 Agricultural Crop Details</h2>
+            <p class="crop-click-note" data-en="Click any crop to view cultivation details and crop season." data-te="సాగు వివరాలు మరియు పంట కాలం తెలుసుకోవడానికి ఏ పంటపై అయినా క్లిక్ చేయండి.">Click any crop to view cultivation details and crop season.</p>
+            <div class="crop-grid">
+                <div class="crop-card crop-clickable" data-crop="Paddy" tabindex="0" role="button">
+                    <div class="crop-icon">🌾</div><h3 data-en="Paddy" data-te="వరి">Paddy</h3>
+                    <p data-en="Rice cultivation and irrigation information." data-te="వరి సాగు మరియు నీటిపారుదల సమాచారం."></p>
+                    <a href="#" class="crop-more" data-en="View full details →" data-te="పూర్తి వివరాలు చూడండి →">View full details →</a>
+                </div>
+                <div class="crop-card crop-clickable" data-crop="Maize" tabindex="0" role="button">
+                    <div class="crop-icon">🌽</div><h3 data-en="Maize" data-te="మొక్కజొన్న">Maize</h3>
+                    <p data-en="Maize farming and seasonal crop guidance." data-te="మొక్కజొన్న సాగు మరియు కాలానుగుణ మార్గదర్శకాలు."></p>
+                    <a href="#" class="crop-more" data-en="View full details →" data-te="పూర్తి వివరాలు చూడండి →">View full details →</a>
+                </div>
+                <div class="crop-card crop-clickable" data-crop="Coffee" tabindex="0" role="button">
+                    <div class="crop-icon">🫘</div><h3 data-en="Coffee" data-te="కాఫీ">Coffee</h3>
+                    <p data-en="Coffee growing, shade management and processing." data-te="కాఫీ సాగు, నీడ నిర్వహణ మరియు ప్రాసెసింగ్."></p>
+                    <a href="#" class="crop-more" data-en="View full details →" data-te="పూర్తి వివరాలు చూడండి →">View full details →</a>
+                </div>
+                <div class="crop-card crop-clickable" data-crop="Groundnut" tabindex="0" role="button">
+                    <div class="crop-icon">🥜</div><h3 data-en="Groundnut" data-te="వేరుశనగ">Groundnut</h3>
+                    <p data-en="Groundnut cultivation and harvesting." data-te="వేరుశనగ సాగు మరియు కోత."></p>
+                    <a href="#" class="crop-more" data-en="View full details →" data-te="పూర్తి వివరాలు చూడండి →">View full details →</a>
+                </div>
+                <div class="crop-card crop-clickable" data-crop="Millets" tabindex="0" role="button">
+                    <div class="crop-icon">🌱</div><h3 data-en="Millets" data-te="చిరుధాన్యాలు">Millets</h3>
+                    <p data-en="Traditional millet cultivation information." data-te="సంప్రదాయ చిరుధాన్యాల సాగు సమాచారం."></p>
+                    <a href="#" class="crop-more" data-en="View full details →" data-te="పూర్తి వివరాలు చూడండి →">View full details →</a>
+                </div>
+            </div>
+            <div id="cropDetailPanel" class="crop-detail-panel" style="display:none" aria-live="polite"></div>
+        </section>
+
+        <!-- MARKET PRICES -->
+        <section id="market">
+            <h2 class="heading" data-en="💰 Agricultural Market Prices" data-te="💰 వ్యవసాయ మార్కెట్ ధరలు">💰 Agricultural Market Prices</h2>
+
+            <div class="table-card">
+                <div class="table-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Crop Name</th>
+                                <th>Market</th>
+                                <th>Price (₹/Quintal)</th>
+                                <th data-en="Price Type" data-te="ధర రకం">Price Type</th><th data-en="Crop Details / Guidance" data-te="పంట వివరాలు / సూచనలు">Crop Details / Guidance</th>
+                            </tr>
+                        </thead>
+                        <tbody id="marketTable">
+                        </tbody>
+                    </table>
+                </div>
+                <p class="notice" data-en="Demonstration prices only. These are sample values, not live mandi rates. Connect an authorized market API for verified prices."
+                   data-te="ఇవి నమూనా ధరలు మాత్రమే; ప్రత్యక్ష మార్కెట్ ధరలు కావు. ధృవీకరించిన ధరల కోసం అధికారిక మార్కెట్ APIని అనుసంధానించండి.">Demonstration prices only. These are sample values, not live mandi rates. Connect an authorized market API for verified prices.</p>
+            </div>
+        </section>
+
+        <!-- SCHEMES -->
+        <!-- WEATHER REPORTING -->
+        <section id="weather">
+            <h2 class="heading" data-en="🌦️ Weather Reporting" data-te="🌦️ వాతావరణ సమాచారం">🌦️ Weather Reporting</h2>
+            <p class="weather-intro" data-en="Check current weather conditions for your village or nearby town to plan irrigation and farm activities." data-te="నీటిపారుదల మరియు వ్యవసాయ పనులను ప్రణాళిక చేసుకోవడానికి మీ గ్రామం లేదా సమీప పట్టణ వాతావరణాన్ని తెలుసుకోండి.">Check current weather conditions for your village or nearby town to plan irrigation and farm activities.</p>
+            <div class="weather-search">
+                <input type="text" id="weatherLocation" placeholder="Enter village or town name" aria-label="Village or town name">
+                <button type="button" id="weatherSearchBtn" data-en="Get Weather" data-te="వాతావరణం తెలుసుకోండి">Get Weather</button>
+            </div>
+            <div class="weather-result" aria-live="polite">
+                <p id="weatherStatus" class="weather-status" data-en="Enter your village or town name to view the latest available weather." data-te="తాజా వాతావరణ సమాచారం కోసం మీ గ్రామం లేదా పట్టణం పేరును నమోదు చేయండి.">Enter your village or town name to view the latest available weather.</p>
+                <div id="weatherCards" class="weather-grid"></div>
+            </div>
+            <p class="weather-note" data-en="Weather data is retrieved online from Open-Meteo. An internet connection is required; forecasts may vary from local conditions." data-te="వాతావరణ సమాచారం Open-Meteo నుంచి ఆన్‌లైన్‌లో పొందబడుతుంది. ఇంటర్నెట్ అవసరం; స్థానిక పరిస్థితుల ప్రకారం వాతావరణం మారవచ్చు.">Weather data is retrieved online from Open-Meteo. An internet connection is required; forecasts may vary from local conditions.</p>
+        </section>
+
+        <section id="schemes">
+            <h2 class="heading" data-en="🏛️ Government Schemes" data-te="🏛️ ప్రభుత్వ పథకాలు">🏛️ Government Schemes</h2>
+
+            <div class="crop-grid">
+                <div class="crop-card">
+                    <h3 data-en="PM-KISAN" data-te="పీఎం-కిసాన్">PM-KISAN</h3>
+                    <p>Explore eligible farmer income support information.</p>
+                    <a href="https://pmkisan.gov.in/" target="_blank">
+                        Visit Website →
+                    </a>
+                </div>
+
+                <div class="crop-card">
+                    <h3 data-en="PMFBY" data-te="పీఎంఎఫ్‌బీవై (పంట బీమా)">PMFBY</h3>
+                    <p>Learn about crop insurance support.</p>
+                    <a href="https://pmfby.gov.in/" target="_blank">
+                        Visit Website →
+                    </a>
+                </div>
+
+                <div class="crop-card">
+                    <h3 data-en="Tribal Welfare" data-te="గిరిజన సంక్షేమం">Tribal Welfare</h3>
+                    <p>Explore tribal development programmes.</p>
+                    <a href="https://tribal.nic.in/" target="_blank">
+                        Visit Website →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact">
+            <h2 class="heading" data-en="📞 Contact & Support" data-te="📞 సంప్రదింపు & సహాయం">📞 Contact & Support</h2>
+            <div class="contact-card">
+                <h3>We are here to support farmers!</h3>
+                <p>Email: tamarabhabharathi2@gmail.com, purnalakshmikatari@gmail.com</p>
+                <p>Location: Andhra Pradesh, India</p>
+                <p>Contact your local agricultural support centre.</p>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 Tribal Farmer Support Portal</p>
+            <p>Empowering Tribal Farmers | Supporting Agriculture 🌱</p>
+        </footer>
+
+    </main>
+</div>
+
+<script>
+/* AGRICULTURAL MARKET PRICE DATA - sample values, not live mandi rates. */
+const marketPrices = [
+    { crop: "Paddy", market: "Visakhapatnam", price: 2300, details: "Rice crop; maintain water levels and monitor pests." },
+    { crop: "Maize", market: "Paderu", price: 2200, details: "Use quality seed; monitor fall armyworm and provide timely irrigation." },
+    { crop: "Coffee Bean", market: "Araku Valley", price: 12000, details: "Shade-grown coffee; harvest ripe berries and dry beans properly." },
+    { crop: "Groundnut", market: "Chinthapalli", price: 6000, details: "Ensure well-drained soil and timely harvesting." },
+    { crop: "Millets", market: "Pedabayalu", price: 2800, details: "Drought-tolerant crops; suitable for rain-fed cultivation." }
+];
+
+const translations = {
+    "Tribal Portal":"గిరిజన పోర్టల్", "Farmer Support System":"రైతు సహాయ వ్యవస్థ",
+    "Supporting Tribal Farmers ❤️":"గిరిజన రైతులకు మద్దతు ❤️",
+    "Tribal Farmer Dashboard":"గిరిజన రైతు డ్యాష్‌బోర్డ్",
+    "Welcome to your agricultural support portal":"మీ వ్యవసాయ సహాయ పోర్టల్‌కు స్వాగతం",
+    "Empowering Tribal Farmers":"గిరిజన రైతుల సాధికారత",
+    "Our portal helps tribal farmers access useful crop information, understand market prices, explore government support schemes and register their farm details in one place. We aim to make farming information simple, accessible and helpful for a stronger agricultural future.":"మా పోర్టల్ ద్వారా గిరిజన రైతులు పంటల సమాచారం తెలుసుకోవచ్చు, మార్కెట్ ధరలను అర్థం చేసుకోవచ్చు, ప్రభుత్వ పథకాలను పరిశీలించవచ్చు మరియు తమ వ్యవసాయ వివరాలను ఒకే చోట నమోదు చేసుకోవచ్చు. వ్యవసాయ సమాచారాన్ని సులభంగా అందించి రైతుల అభివృద్ధికి తోడ్పడటమే మా లక్ష్యం.",
+    "Technology for agriculture, better prices and a better future.":"వ్యవసాయానికి సాంకేతికత, మెరుగైన ధరలు, మంచి భవిష్యత్తు.",
+    "Register Now":"ఇప్పుడే నమోదు చేసుకోండి",
+    "Dashboard":"డ్యాష్‌బోర్డ్", "Farmer Registration":"రైతు నమోదు",
+    "Registered Farmer Details":"నమోదైన రైతుల వివరాలు",
+    "Tribal Farmer Dashboard":"గిరిజన రైతుల డ్యాష్‌బోర్డ్",
+    "Welcome to your agricultural support portal":"మీ వ్యవసాయ సహాయ పోర్టల్‌కు స్వాగతం",
+    "Total Farmers":"మొత్తం రైతులు", "Crop Types Registered":"నమోదైన పంట రకాలు",
+    "Total Land (Acres)":"మొత్తం భూమి (ఎకరాలు)", "Registrations":"నమోదులు",
+    "Crop Details":"పంట వివరాలు", "Market Prices":"మార్కెట్ ధరలు",
+    "Government Schemes":"ప్రభుత్వ పథకాలు", "Contact Support":"సంప్రదింపు సహాయం",
+    "Farmer Statistics":"రైతుల గణాంకాలు", "Total Farmers":"మొత్తం రైతులు",
+    "Crop Types Registered":"నమోదైన పంట రకాలు", "Total Land (Acres)":"మొత్తం భూమి (ఎకరాలు)",
+    "Crop Types Registered":"నమోదైన పంట రకాలు", "Total Land (Acres)":"మొత్తం భూమి (ఎకరాలు)",
+    "Registrations":"నమోదులు", "Farmer Name":"రైతు పేరు",
+    "Mobile Number":"మొబైల్ నంబర్", "Village":"గ్రామం", "District":"జిల్లా",
+    "Land in Acres or Others":"ఎకరాలు లేదా ఇతర యూనిట్లలో భూమి",
+    "Aadhaar Number":"ఆధార్ నంబర్", "Aadhaar":"ఆధార్",
+    "Select Crop":"పంటను ఎంచుకోండి", "Choose Crop":"పంటను ఎంచుకోండి",
+    "Full Address":"పూర్తి చిరునామా", "Submit Registration":"నమోదు సమర్పించండి",
+    "Registered Farmers Details":"నమోదైన రైతుల వివరాలు", "Mobile":"మొబైల్",
+    "Land":"భూమి", "Crop":"పంట", "No farmers registered yet.":"ఇంకా రైతులు నమోదు కాలేదు.",
+    "Agricultural Crop Details":"వ్యవసాయ పంటల వివరాలు",
+    "Rice cultivation and irrigation information.":"వరి సాగు మరియు నీటిపారుదల సమాచారం.",
+    "Maize farming and seasonal crop guidance.":"మొక్కజొన్న సాగు మరియు కాలానుగుణ పంట మార్గదర్శకాలు.",
+    "Coffee bean cultivation, shade management, harvesting and post-harvest processing guidance.":"కాఫీ గింజల సాగు, నీడ నిర్వహణ, కోత మరియు కోత అనంతర ప్రాసెసింగ్ మార్గదర్శకాలు.",
+    "Groundnut cultivation and harvesting.":"వేరుశనగ సాగు మరియు కోత.",
+    "Traditional millet cultivation information.":"సంప్రదాయ చిరుధాన్యాల సాగు సమాచారం.",
+    "Paddy":"వరి", "Maize":"మొక్కజొన్న", "Coffee":"కాఫీ",
+    "Rice cultivation and irrigation information.":"వరి సాగు మరియు నీటిపారుదల సమాచారం.",
+    "Maize farming and seasonal crop guidance.":"మొక్కజొన్న సాగు మరియు కాలానుగుణ పంట మార్గదర్శకాలు.",
+    "Groundnut cultivation and harvesting.":"వేరుశనగ సాగు మరియు కోత.",
+    "Traditional millet cultivation information.":"సంప్రదాయ చిరుధాన్యాల సాగు సమాచారం.",
+    "Crop Name":"పంట పేరు", "Market":"మార్కెట్",
+    "Price (₹/Quintal)":"ధర (₹/క్వింటాల్)",
+    "Coffee Bean":"కాఫీ గింజలు", "Groundnut":"వేరుశనగ", "Millets":"చిరుధాన్యాలు",
+    "Agricultural Market Prices":"వ్యవసాయ మార్కెట్ ధరలు", "Crop Name":"పంట పేరు",
+    "Market":"మార్కెట్", "Price (₹/Quintal)":"ధర (₹/క్వింటాల్)",
+    "Price Type":"ధర రకం", "Crop Details / Guidance":"పంట వివరాలు / సూచనలు",
+    "Demo Price":"నమూనా ధర",
+    "Demonstration prices only. These are sample values, not live mandi rates. Connect an authorized market API for verified prices.":"ఇవి నమూనా ధరలు మాత్రమే; ప్రత్యక్ష మార్కెట్ ధరలు కావు. ధృవీకరించిన ధరల కోసం అధికారిక మార్కెట్ APIని అనుసంధానించండి.",
+    "Government Schemes":"ప్రభుత్వ పథకాలు",
+    "Explore eligible farmer income support information.":"అర్హులైన రైతుల ఆదాయ మద్దతు సమాచారాన్ని తెలుసుకోండి.",
+    "Learn about crop insurance support.":"పంట బీమా మద్దతు గురించి తెలుసుకోండి.",
+    "Explore tribal development programmes.":"గిరిజన అభివృద్ధి కార్యక్రమాలను తెలుసుకోండి.",
+    "We are here to support farmers!":"రైతులకు సహాయం చేయడానికి మేము సిద్ధంగా ఉన్నాము!",
+    "Contact your local agricultural support centre.":"మీ స్థానిక వ్యవసాయ సహాయ కేంద్రాన్ని సంప్రదించండి.",
+    "Visit Website →":"వెబ్‌సైట్‌ను సందర్శించండి →",
+    "Learn about crop insurance support.":"పంట బీమా మద్దతు గురించి తెలుసుకోండి.",
+    "Explore tribal development programmes.":"గిరిజన అభివృద్ధి కార్యక్రమాలను తెలుసుకోండి.",
+    "Contact & Support":"సంప్రదింపు & సహాయం",
+    "We are here to support farmers!":"రైతులకు సహాయం చేయడానికి మేము సిద్ధంగా ఉన్నాము!",
+    "Location: Andhra Pradesh, India":"ప్రాంతం: ఆంధ్రప్రదేశ్, భారతదేశం",
+    "Contact your local agricultural support centre.":"మీ స్థానిక వ్యవసాయ సహాయ కేంద్రాన్ని సంప్రదించండి.",
+    "© 2026 Tribal Farmer Support Portal":"© 2026 గిరిజన రైతు సహాయ పోర్టల్",
+    "Empowering Tribal Farmers | Supporting Agriculture 🌱":"గిరిజన రైతుల సాధికారత | వ్యవసాయానికి మద్దతు 🌱",
+    "Email: tamarabhabharathi2@gmail.com, purnalakshmikatari@gmail.com":"ఈమెయిల్: tamarabhabharathi2@gmail.com, purnalakshmikatari@gmail.com"
+};
+const marketDetailsTe = {
+    "Rice crop; maintain water levels and monitor pests.":"వరి పంట; నీటి మట్టాలను నిర్వహించి చీడపీడలను గమనించండి.",
+    "Use quality seed; monitor fall armyworm and provide timely irrigation.":"నాణ్యమైన విత్తనాలు వాడండి; పురుగులను గమనించి సమయానికి నీరు పెట్టండి.",
+    "Shade-grown coffee; harvest ripe berries and dry beans properly.":"నీడలో పెరిగిన కాఫీ; పండిన కాయలను కోసి గింజలను సరిగ్గా ఎండబెట్టండి.",
+    "Ensure well-drained soil and timely harvesting.":"నీరు బాగా ఇంకిపోయే నేలను ఎంచుకుని సరైన సమయంలో కోత కోయండి.",
+    "Drought-tolerant crops; suitable for rain-fed cultivation.":"కరువును తట్టుకునే పంటలు; వర్షాధార సాగుకు అనుకూలం."
+};
+let currentLanguage = "en";
+const languageToggle = document.getElementById("languageToggle");
+const farmerForm = document.getElementById("farmerForm");
+const registeredFarmers = [];
+
+/* Open only the dashboard when the portal first loads.
+   Sidebar navigation displays the selected page without changing its content. */
+function showPortalView(targetId) {
+    const pageIds = ["dashboard", "registration", "registeredDetails", "crops", "market", "weather", "schemes", "contact"];
+    pageIds.forEach(id => {
+        const section = document.getElementById(id);
+        if (section) section.classList.toggle("view-hidden", id !== targetId);
+    });
+    const hero = document.getElementById("homeHero");
+    if (hero) hero.classList.toggle("view-hidden", targetId !== "dashboard");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+document.querySelectorAll(".sidebar a[href^='#']").forEach(link => {
+    link.addEventListener("click", function(event) {
+        const targetId = this.getAttribute("href").slice(1);
+        if (["dashboard", "registration", "registeredDetails", "crops", "market", "weather", "schemes", "contact"].includes(targetId)) {
+            event.preventDefault();
+            showPortalView(targetId);
+        }
+    });
+});
+showPortalView("dashboard");
+
+function translate(value) {
+    return currentLanguage === "te" ? (translations[value] || value) :
+        (Object.keys(translations).find(key => translations[key] === value) || value);
+}
+let latestWeather = null;
+const weatherCodeText = {
+  0: ["Clear sky", "ఆకాశం నిర్మలంగా ఉంది"], 1: ["Mainly clear", "తేలికపాటి మేఘాలు"],
+  2: ["Partly cloudy", "కొంత మేఘావృతం"], 3: ["Overcast", "మేఘావృతం"],
+  45: ["Fog", "పొగమంచు"], 48: ["Depositing rime fog", "దట్టమైన పొగమంచు"],
+  51: ["Light drizzle", "తేలికపాటి చిరుజల్లు"], 53: ["Drizzle", "చిరుజల్లు"], 55: ["Dense drizzle", "ఎక్కువ చిరుజల్లు"],
+  61: ["Light rain", "తేలికపాటి వర్షం"], 63: ["Rain", "వర్షం"], 65: ["Heavy rain", "భారీ వర్షం"],
+  71: ["Light snow", "తేలికపాటి మంచు"], 73: ["Snow", "మంచు"], 75: ["Heavy snow", "భారీ మంచు"],
+  80: ["Rain showers", "జల్లుల వర్షం"], 81: ["Rain showers", "వర్షపు జల్లులు"], 82: ["Heavy rain showers", "భారీ వర్షపు జల్లులు"],
+  95: ["Thunderstorm", "ఉరుములతో కూడిన వర్షం"], 96: ["Thunderstorm with hail", "వడగళ్లతో ఉరుముల వర్షం"], 99: ["Severe thunderstorm", "తీవ్రమైన ఉరుముల వర్షం"]
+};
+function weatherLabel(code) {
+    const item = weatherCodeText[code] || ["Weather information", "వాతావరణ సమాచారం"];
+    return item[currentLanguage === "te" ? 1 : 0];
+}
+function renderWeather(data) {
+    const cards = document.getElementById("weatherCards");
+    const status = document.getElementById("weatherStatus");
+    if (!data) { cards.innerHTML = ""; return; }
+    const current = data.current;
+    const values = [
+        ["🌡️", currentLanguage === "te" ? "ఉష్ణోగ్రత" : "Temperature", `${Math.round(current.temperature_2m)} °C`],
+        ["🌥️", currentLanguage === "te" ? "వాతావరణ స్థితి" : "Condition", weatherLabel(current.weather_code)],
+        ["💧", currentLanguage === "te" ? "తేమ" : "Humidity", `${current.relative_humidity_2m}%`],
+        ["💨", currentLanguage === "te" ? "గాలి వేగం" : "Wind Speed", `${current.wind_speed_10m} km/h`]
+    ];
+    cards.innerHTML = values.map(v => `<div class="weather-card"><span>${v[0]}</span><div>${v[1]}</div><strong>${v[2]}</strong></div>`).join("");
+    const place = data.place || "";
+    status.textContent = currentLanguage === "te" ? `${place} ప్రాంతానికి ప్రస్తుత వాతావరణ సమాచారం` : `Current weather for ${place}`;
+}
+async function getWeather() {
+    const input = document.getElementById("weatherLocation");
+    const status = document.getElementById("weatherStatus");
+    const cards = document.getElementById("weatherCards");
+    const place = input.value.trim();
+    if (!place) {
+        status.textContent = currentLanguage === "te" ? "దయచేసి గ్రామం లేదా పట్టణం పేరు నమోదు చేయండి." : "Please enter a village or town name.";
+        cards.innerHTML = "";
+        return;
+    }
+    status.textContent = currentLanguage === "te" ? "వాతావరణ సమాచారం పొందుతోంది..." : "Loading weather information...";
+    cards.innerHTML = "";
+    try {
+        const geoResponse = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(place)}&count=1&language=en&format=json`);
+        if (!geoResponse.ok) throw new Error("Location lookup failed");
+        const geo = await geoResponse.json();
+        if (!geo.results || !geo.results.length) throw new Error("Location not found");
+        const location = geo.results[0];
+        const forecastUrl = `https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&timezone=auto`;
+        const weatherResponse = await fetch(forecastUrl);
+        if (!weatherResponse.ok) throw new Error("Weather service unavailable");
+        const weather = await weatherResponse.json();
+        latestWeather = { ...weather, place: [location.name, location.admin1, location.country].filter(Boolean).join(", ") };
+        renderWeather(latestWeather);
+    } catch (error) {
+        status.textContent = currentLanguage === "te" ? "వాతావరణ సమాచారం పొందలేకపోయాం. ప్రాంతం పేరును తనిఖీ చేసి మళ్లీ ప్రయత్నించండి." : "Could not load weather. Check the place name and internet connection, then try again.";
+    }
+}
+document.getElementById("weatherSearchBtn").addEventListener("click", getWeather);
+document.getElementById("weatherLocation").addEventListener("keydown", event => { if (event.key === "Enter") getWeather(); });
+
+
+const cropInfo = {
+ "Paddy": {
+  en:{season:"Kharif (June–October); some regions also grow Rabi rice.",soil:"Clayey or loamy soil that retains water; level fields help.",water:"Needs regular water; manage standing water carefully and drain before harvest.",steps:["Select suitable seed and prepare a level nursery/field.","Transplant or sow at recommended spacing.","Weed and monitor pests; apply nutrients based on local guidance.","Harvest when grains mature and dry properly."],harvest:"Usually around 3–5 months, depending on variety and conditions."},
+  te:{season:"ఖరీఫ్ (జూన్–అక్టోబర్); కొన్ని ప్రాంతాల్లో రబీ వరి కూడా సాగు చేస్తారు.",soil:"నీటిని నిలుపుకునే బంకమట్టి లేదా లోమీ నేల; సమతల పొలం అనుకూలం.",water:"క్రమం తప్పకుండా నీరు అవసరం; పొలంలో నీటి నిల్వను నియంత్రించి కోతకు ముందు నీరు తగ్గించాలి.",steps:["అనుకూల విత్తనాలను ఎంచుకుని నారు/పొలం సిద్ధం చేయండి.","సిఫార్సు చేసిన దూరంలో నాటండి లేదా విత్తండి.","కలుపు, చీడపీడలను గమనించి స్థానిక సూచనల ప్రకారం పోషకాలు అందించండి.","ధాన్యం పక్వానికి వచ్చినప్పుడు కోత కోసి సరిగ్గా ఎండబెట్టండి."],harvest:"రకం మరియు పరిస్థితులపై ఆధారపడి సాధారణంగా 3–5 నెలలు."}
+ },
+ "Maize": {
+  en:{season:"Kharif (June–July) or Rabi (October–November), depending on region.",soil:"Well-drained fertile loamy soil.",water:"Moisture is important during flowering and grain formation; avoid waterlogging.",steps:["Prepare well-drained soil and sow quality seed.","Maintain suitable spacing and weed early.","Monitor fall armyworm and other pests.","Harvest when cobs and kernels mature; dry before storage."],harvest:"Often about 3–4 months, depending on variety."},
+  te:{season:"ప్రాంతాన్ని బట్టి ఖరీఫ్ (జూన్–జూలై) లేదా రబీ (అక్టోబర్–నవంబర్).",soil:"నీరు బాగా ఇంకిపోయే సారవంతమైన లోమీ నేల.",water:"పుష్పించే సమయంలో మరియు గింజలు ఏర్పడే సమయంలో తేమ అవసరం; నీరు నిల్వ ఉండకూడదు.",steps:["నేలను సిద్ధం చేసి నాణ్యమైన విత్తనాలు విత్తండి.","సరైన దూరం పాటించి ప్రారంభంలో కలుపు తొలగించండి.","ఫాల్ ఆర్మీవార్మ్ తదితర చీడపీడలను గమనించండి.","కంకులు పక్వానికి వచ్చినప్పుడు కోసి నిల్వకు ముందు ఎండబెట్టండి."],harvest:"రకాన్ని బట్టి సాధారణంగా 3–4 నెలలు."}
+ },
+ "Coffee": {
+  en:{season:"Flowering commonly follows rains; berries often ripen and are harvested mainly November–February in many Indian coffee areas.",soil:"Rich, well-drained soil; shade trees are commonly used.",water:"Rainfall and moisture are important; protect young plants and avoid waterlogging.",steps:["Plant suitable seedlings in a shaded, well-drained area.","Maintain shade, mulch and manage weeds.","Monitor pests and diseases; prune as needed.","Pick ripe red berries and process/dry beans carefully."],harvest:"Coffee is a perennial crop; berry harvest timing varies by region and cultivar."},
+  te:{season:"వర్షాల తర్వాత పుష్పించడం సాధారణం; భారతదేశంలోని అనేక కాఫీ ప్రాంతాల్లో నవంబర్–ఫిబ్రవరి మధ్య పండ్ల కోత ఉంటుంది.",soil:"సారవంతమైన, నీరు బాగా ఇంకిపోయే నేల; నీడ చెట్లు ఉపయోగిస్తారు.",water:"వర్షపాతం మరియు నేల తేమ కీలకం; చిన్న మొక్కలను సంరక్షించి నీరు నిల్వ కాకుండా చూడండి.",steps:["నీడ మరియు నీరు పారే సదుపాయం ఉన్న ప్రదేశంలో అనుకూల మొక్కలు నాటండి.","నీడ, మల్చింగ్ నిర్వహించి కలుపును నియంత్రించండి.","చీడపీడలు, వ్యాధులను గమనించి అవసరమైన కత్తిరింపులు చేయండి.","పండిన ఎర్ర కాయలను కోసి గింజలను జాగ్రత్తగా ప్రాసెస్ చేసి ఎండబెట్టండి."],harvest:"కాఫీ బహువార్షిక పంట; కోత కాలం ప్రాంతం మరియు రకాన్ని బట్టి మారుతుంది."}
+ },
+ "Groundnut": {
+  en:{season:"Kharif (June–July); Rabi/summer crops are grown in some irrigated areas.",soil:"Light, well-drained sandy loam; avoid heavy waterlogged soils.",water:"Avoid waterlogging; moisture is particularly important during flowering and pod formation.",steps:["Prepare loose soil and sow seed at recommended depth.","Keep field weed-free early in growth.","Monitor leaf spots and other pests/diseases.","Harvest when plants and pods mature; dry pods thoroughly."],harvest:"Typically around 3–5 months, depending on variety and season."},
+  te:{season:"ఖరీఫ్ (జూన్–జూలై); నీటిపారుదల ఉన్న ప్రాంతాల్లో రబీ/వేసవి సాగు కూడా చేస్తారు.",soil:"తేలికపాటి, నీరు బాగా ఇంకిపోయే ఇసుక లోమీ నేల; నీరు నిలిచే నేలలు నివారించాలి.",water:"నీరు నిల్వ కాకుండా చూడాలి; పుష్పించే సమయంలో మరియు కాయలు ఏర్పడే సమయంలో తేమ ముఖ్యమైనది.",steps:["మెత్తని నేల సిద్ధం చేసి సూచించిన లోతులో విత్తనాలు వేయండి.","మొదటి దశలో కలుపును నియంత్రించండి.","ఆకు మచ్చలు మరియు ఇతర చీడపీడలు/వ్యాధులను గమనించండి.","మొక్కలు, కాయలు పక్వానికి వచ్చినప్పుడు కోసి కాయలను బాగా ఎండబెట్టండి."],harvest:"రకం మరియు కాలాన్ని బట్టి సాధారణంగా 3–5 నెలలు."}
+ },
+ "Millets": {
+  en:{season:"Mostly Kharif (June–July) in rain-fed areas; some millet types are grown in other seasons.",soil:"Often suited to well-drained soils and lower-input rain-fed conditions.",water:"Many millet crops tolerate dry conditions; avoid waterlogging and establish crop with timely rains.",steps:["Choose a millet species suited to the local climate.","Sow with the onset of suitable rains.","Thin/weeding as needed and monitor pests.","Harvest when grains mature and dry for safe storage."],harvest:"Varies by millet type, commonly about 2–4 months."},
+  te:{season:"వర్షాధార ప్రాంతాల్లో ప్రధానంగా ఖరీఫ్ (జూన్–జూలై); కొన్ని చిరుధాన్యాలు ఇతర కాలాల్లో కూడా సాగు చేస్తారు.",soil:"నీరు బాగా ఇంకిపోయే నేలలు మరియు తక్కువ పెట్టుబడి వర్షాధార పరిస్థితులకు అనుకూలం.",water:"చాలా చిరుధాన్యాలు పొడి పరిస్థితులను తట్టుకుంటాయి; నీరు నిల్వ కాకుండా వర్షాలు వచ్చినప్పుడు సాగు ప్రారంభించండి.",steps:["స్థానిక వాతావరణానికి అనుకూలమైన చిరుధాన్య రకాన్ని ఎంచుకోండి.","అనుకూల వర్షాలు ప్రారంభమైనప్పుడు విత్తండి.","అవసరమైనప్పుడు మొక్కల సాంద్రత, కలుపు నియంత్రణ చేయండి; చీడపీడలను గమనించండి.","గింజలు పక్వానికి వచ్చినప్పుడు కోసి నిల్వకు బాగా ఎండబెట్టండి."],harvest:"చిరుధాన్య రకాన్ని బట్టి మారుతుంది; సాధారణంగా 2–4 నెలలు."}
+ }
+};
+function showCropDetails(cropName) {
+ const panel=document.getElementById("cropDetailPanel");
+ window.__farmerOpenCrop=cropName;
+ const data=cropInfo[cropName]?.[currentLanguage];
+ if(!data)return;
+ const te=currentLanguage==="te";
+ const labels=te?{season:"పంట కాలం",soil:"నేల",water:"నీటి అవసరం",steps:"సాగు విధానం",harvest:"కోత / పంట వ్యవధి",close:"వివరాలు మూసివేయండి"}:{season:"Crop Season",soil:"Soil Requirements",water:"Water Requirements",steps:"Cultivation Steps",harvest:"Harvest / Crop Duration",close:"Close Details"};
+ panel.innerHTML=`<button type="button" class="crop-detail-close" onclick="window.__farmerOpenCrop=null;document.getElementById('cropDetailPanel').style.display='none'">${labels.close}</button>
+ <h3>${te?({Paddy:"వరి",Maize:"మొక్కజొన్న",Coffee:"కాఫీ",Groundnut:"వేరుశనగ",Millets:"చిరుధాన్యాలు"}[cropName]):cropName}</h3>
+ <h4>${labels.season}</h4><p>${data.season}</p><h4>${labels.soil}</h4><p>${data.soil}</p><h4>${labels.water}</h4><p>${data.water}</p><h4>${labels.steps}</h4><ul>${data.steps.map(s=>`<li>${s}</li>`).join("")}</ul><h4>${labels.harvest}</h4><p>${data.harvest}</p>`;
+ panel.style.display="block";
+ panel.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+document.querySelectorAll(".crop-clickable").forEach(card=>{
+ card.addEventListener("click",e=>{if(e.target.closest("a"))e.preventDefault();showCropDetails(card.dataset.crop);});
+ card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();showCropDetails(card.dataset.crop);}});
+});
+
+function displayMarketPrices() {
+    const table = document.getElementById("marketTable");
+    table.innerHTML = "";
+    marketPrices.forEach(item => {
+        const row = document.createElement("tr");
+        const values = [
+            translate(item.crop), item.market,
+            "₹" + item.price.toLocaleString("en-IN"),
+            currentLanguage === "te" ? "నమూనా ధర" : "Demo Price",
+            currentLanguage === "te" ? (marketDetailsTe[item.details] || item.details) : item.details
+        ];
+        values.forEach(value => {
+            const cell = document.createElement("td");
+            cell.textContent = value;
+            row.appendChild(cell);
+        });
+        table.appendChild(row);
+    });
+}
+function renderFarmers() {
+    const tbody = document.getElementById("registeredFarmers");
+    const empty = document.getElementById("noFarmers");
+    tbody.innerHTML = "";
+    registeredFarmers.forEach(farmer => {
+        const row = document.createElement("tr");
+        [farmer.name, farmer.phone, farmer.village, farmer.district,
+         farmer.aadhaar, `${farmer.land} ${currentLanguage === "te" ? "ఎకరాలు" : "Acres"}`, translate(farmer.crop)].forEach(value => {
+            const cell = document.createElement("td");
+            cell.textContent = value;
+            row.appendChild(cell);
+        });
+        tbody.appendChild(row);
+    });
+    empty.style.display = registeredFarmers.length ? "none" : "block";
+    const cropTypes = new Set(registeredFarmers.map(f => f.crop));
+    const acres = registeredFarmers.reduce((sum, f) => sum + (Number(f.land) || 0), 0);
+    document.getElementById("totalFarmers").textContent = registeredFarmers.length;
+    document.getElementById("totalRegistrations").textContent = registeredFarmers.length;
+    document.getElementById("totalCrops").textContent = cropTypes.size;
+    document.getElementById("totalLand").textContent = acres.toFixed(2);
+}
+farmerForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const village = document.getElementById("village").value.trim();
+    const district = document.getElementById("district").value.trim();
+    const land = Number(document.getElementById("land").value);
+    const crop = document.getElementById("crop").value;
+    const address = document.getElementById("address").value.trim();
+    const aadhaar = document.getElementById("aadhaar").value.trim();
+    if (!name || !phone || !village || !district || !land || land <= 0 ||
+        !crop || !address || !/^[6-9]\d{9}$/.test(phone) || !/^\d{12}$/.test(aadhaar)) {
+        alert(currentLanguage === "te" ? "దయచేసి అన్ని వివరాలను సరిగ్గా పూరించండి." :
+            "Please fill all details correctly.");
+        return;
+    }
+    registeredFarmers.push({ name, phone, village, district, aadhaar, land, crop, address });
+    renderFarmers();
+    alert(currentLanguage === "te" ? "రైతు నమోదు విజయవంతంగా పూర్తయింది!" : "Submitted successfully!");
+    farmerForm.reset();
+});
+function setLanguage(language) {
+    currentLanguage = language;
+    document.documentElement.lang = language;
+    document.querySelectorAll("[data-en][data-te]").forEach(element => {
+        const value = element.getAttribute(language === "te" ? "data-te" : "data-en");
+        if (value !== null) {
+            if (element.tagName === "OPTION") element.textContent = value;
+            else element.textContent = value;
+        }
+    });
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(node => {
+        const original = node.nodeValue.trim();
+        if (!original || node.parentElement.closest("script, style, input, textarea, option, #registeredFarmers, #marketTable")) return;
+        const translated = translate(original);
+        if (translated !== original) node.nodeValue = node.nodeValue.replace(original, translated);
+    });
+    const placeholders = {
+        name:["Enter farmer name","రైతు పేరును నమోదు చేయండి"],
+        phone:["10 digit mobile number","10 అంకెల మొబైల్ నంబర్"],
+        village:["Enter village","గ్రామం పేరు నమోదు చేయండి"],
+        district:["Enter district","జిల్లా పేరు నమోదు చేయండి"],
+        land:["Enter land area","భూమి విస్తీర్ణం నమోదు చేయండి"],
+        aadhaar:["Enter 12 digit Aadhaar number","12 అంకెల ఆధార్ నంబర్ నమోదు చేయండి"],
+        address:["Enter full address","పూర్తి చిరునామా నమోదు చేయండి"]
+    };
+    Object.entries(placeholders).forEach(([id, values]) => {
+        const field = document.getElementById(id);
+        if (field) field.placeholder = values[language === "te" ? 1 : 0];
+    });
+    languageToggle.textContent = language === "te" ? "English" : "తెలుగు";
+    displayMarketPrices();
+    renderFarmers();
+    if (latestWeather) renderWeather(latestWeather);
+}
+languageToggle.addEventListener("click", () => setLanguage(currentLanguage === "en" ? "te" : "en"));
+document.querySelector(".profile").addEventListener("click", function(event) {
+    event.preventDefault();
+    showPortalView("registration");
+});
+document.querySelector(".hero-btn").addEventListener("click", function(event) {
+    event.preventDefault();
+    showPortalView("registration");
+});
+displayMarketPrices();
+renderFarmers();
+</script>
+<script>
+/*    ADDED: COVER PAGE + BUYER PORTAL LOGIC
+   (The existing farmer portal code above is unchanged. This block only
+   reads its shared data: registeredFarmers, marketPrices, cropInfo,
+   translations, currentLanguage, and extends setLanguage.)
+   */
+(function () {
+    const $ = id => document.getElementById(id);
+    const coverPage = $("coverPage");
+    const buyerApp = $("buyerApp");
+
+    const teleRequests = [];
+    const videoRequests = [];
+    const registeredBuyers = [];
+    let openCrop = null;
+
+    const isTe = () => currentLanguage === "te";
+    const bt = (en, tel) => (isTe() ? tel : en);
+    const cn = name => (isTe() ? (translations[name] || name) : name);
+    const phoneOk = v => /^[6-9]\d{9}$/.test(v);
+    const views = ["dashboard", "buyer-register", "buyer-details", "crops", "farmers", "tele", "video", "contact"];
+    const cropIcons = { "Paddy": "🌾", "Maize": "🌽", "Coffee Bean": "🫘", "Groundnut": "🥜", "Millets": "🌱" };
+
+    /* message line that translates itself when the language changes */
+    function setMsg(el, en, tel, ok) {
+        el.setAttribute("data-en", en);
+        el.setAttribute("data-te", tel);
+        el.textContent = bt(en, tel);
+        el.className = "b-msg " + (ok ? "ok" : "err");
+    }
+    function clearMsg(el) {
+        el.removeAttribute("data-en");
+        el.removeAttribute("data-te");
+        el.textContent = "";
+    }
+    function addRow(tbody, values) {
+        const tr = document.createElement("tr");
+        values.forEach(v => {
+            const td = document.createElement("td");
+            if (v instanceof Node) td.appendChild(v); else td.textContent = v;
+            tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+    }
+    function selVal(sel) {
+        const o = sel.options[sel.selectedIndex];
+        return { en: o.getAttribute("data-en") || o.textContent, te: o.getAttribute("data-te") || o.textContent };
+    }
+    function farmerCount(crop) {
+        return registeredFarmers.filter(f => f.crop === crop || (crop === "Coffee Bean" && f.crop === "Coffee")).length;
+    }
+    function todayStr() {
+        const d = new Date(), p = n => String(n).padStart(2, "0");
+        return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate());
+    }
+    function newRoomUrl() {
+        const id = "TribalPortal-" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-3);
+        return "https://meet.jit.si/" + id;
+    }
+    function lockScroll(on) { document.body.style.overflow = on ? "hidden" : ""; }
+
+    /*  cover / farmer / buyer switching  */
+    function hideCovers() {
+        coverPage.classList.add("cover-hidden");
+    }
+    /* landing page: choose Farmer or Buyer */
+    function openCover() {
+        buyerApp.classList.remove("b-open");
+        hideCovers();
+        coverPage.classList.remove("cover-hidden");
+        lockScroll(true);
+    }
+    function openFarmer() {
+        hideCovers();
+        buyerApp.classList.remove("b-open");
+        lockScroll(false);
+        showPortalView("dashboard");
+    }
+    function openBuyer() {
+        hideCovers();
+        buyerApp.classList.add("b-open");
+        lockScroll(true);
+        showBuyerView("dashboard");
+    }
+
+    function showBuyerView(v) {
+        if (v === "cover") { openCover(); return; }
+        if (!views.includes(v)) v = "dashboard";
+        views.forEach(id => $("bv-" + id).classList.toggle("b-hidden", id !== v));
+        document.querySelectorAll(".b-sidebar a[data-bview]").forEach(a =>
+            a.classList.toggle("active", a.dataset.bview === v));
+        prefillBuyer();
+        renderAll();
+        buyerApp.scrollTop = 0;
+    }
+
+    function prefillBuyer() {
+        $("vDate").min = todayStr();
+    }
+
+    /*  renderers  */
+    function renderDashboard() {
+        $("bWelcome").textContent = bt("Welcome, Buyer", "స్వాగతం, కొనుగోలుదారు");
+        const crops = new Set(registeredFarmers.map(f => f.crop));
+        const acres = registeredFarmers.reduce((s, f) => s + (Number(f.land) || 0), 0);
+        $("bStatFarmers").textContent = registeredFarmers.length;
+        $("bStatCrops").textContent = crops.size;
+        $("bStatLand").textContent = acres.toFixed(2);
+        $("bStatReq").textContent = teleRequests.length + videoRequests.length;
+
+        const counts = {};
+        registeredFarmers.forEach(f => { counts[f.crop] = (counts[f.crop] || 0) + 1; });
+        const wrap = $("bCropSummary");
+        wrap.innerHTML = "";
+        Object.keys(counts).forEach(c => {
+            const s = document.createElement("span");
+            s.className = "b-pill";
+            s.textContent = (cropIcons[c] || "🌱") + " " + cn(c) + ": " + counts[c];
+            wrap.appendChild(s);
+        });
+        $("bNoCropSummary").style.display = Object.keys(counts).length ? "none" : "block";
+    }
+
+    function renderCrops() {
+        const grid = $("bCropGrid");
+        grid.innerHTML = "";
+        marketPrices.forEach(item => {
+            const card = document.createElement("div");
+            card.className = "crop-card crop-clickable";
+            card.tabIndex = 0;
+            card.setAttribute("role", "button");
+
+            const icon = document.createElement("div");
+            icon.className = "crop-icon";
+            icon.textContent = cropIcons[item.crop] || "🌱";
+            const h3 = document.createElement("h3");
+            h3.textContent = cn(item.crop);
+            const p1 = document.createElement("p");
+            p1.textContent = bt("Market price (demo)", "మార్కెట్ ధర (నమూనా)") + ": ₹" +
+                item.price.toLocaleString("en-IN") + " / " + bt("quintal", "క్వింటాల్");
+            const p2 = document.createElement("p");
+            p2.textContent = bt("Market", "మార్కెట్") + ": " + item.market;
+            const p3 = document.createElement("p");
+            p3.textContent = bt("Farmers registered", "నమోదైన రైతులు") + ": " + farmerCount(item.crop);
+            const more = document.createElement("a");
+            more.href = "#";
+            more.className = "crop-more";
+            more.textContent = bt("View full details →", "పూర్తి వివరాలు చూడండి →");
+
+            [icon, h3, p1, p2, p3, more].forEach(n => card.appendChild(n));
+            card.addEventListener("click", e => { if (e.target.closest("a")) e.preventDefault(); showBuyerCrop(item.crop, true); });
+            card.addEventListener("keydown", e => {
+                if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showBuyerCrop(item.crop, true); }
+            });
+            grid.appendChild(card);
+        });
+    }
+
+    function showBuyerCrop(name, scroll) {
+        openCrop = name;
+        const panel = $("bCropPanel");
+        const item = marketPrices.find(m => m.crop === name);
+        const info = cropInfo[name === "Coffee Bean" ? "Coffee" : name];
+        const d = info && info[isTe() ? "te" : "en"];
+        if (!item || !d) { panel.style.display = "none"; return; }
+        const L = isTe()
+            ? { price: "మార్కెట్ ధర (నమూనా)", q: "క్వింటాల్", guide: "పంట సూచనలు", season: "పంట కాలం", soil: "నేల", water: "నీటి అవసరం", steps: "సాగు విధానం", harvest: "కోత / పంట వ్యవధి", close: "వివరాలు మూసివేయండి", farmers: "ఈ పంట నమోదు చేసిన రైతులు", see: "రైతులను చూడండి" }
+            : { price: "Market Price (Demo)", q: "quintal", guide: "Crop Guidance", season: "Crop Season", soil: "Soil Requirements", water: "Water Requirements", steps: "Cultivation Steps", harvest: "Harvest / Crop Duration", close: "Close Details", farmers: "Farmers who registered this crop", see: "See Registered Farmers" };
+        const guide = isTe() ? (marketDetailsTe[item.details] || item.details) : item.details;
+        panel.innerHTML =
+            `<button type="button" class="crop-detail-close" id="bCropClose">${L.close}</button>
+             <h3>${cropIcons[name] || ""} ${cn(name)}</h3>
+             <h4>${L.price}</h4><p>₹${item.price.toLocaleString("en-IN")} / ${L.q} — ${item.market}</p>
+             <h4>${L.guide}</h4><p>${guide}</p>
+             <h4>${L.season}</h4><p>${d.season}</p>
+             <h4>${L.soil}</h4><p>${d.soil}</p>
+             <h4>${L.water}</h4><p>${d.water}</p>
+             <h4>${L.steps}</h4><ul>${d.steps.map(s => `<li>${s}</li>`).join("")}</ul>
+             <h4>${L.harvest}</h4><p>${d.harvest}</p>
+             <h4>${L.farmers}</h4><p>${farmerCount(name)}</p>
+             <p><button type="button" class="b-btn-sm" id="bCropFarmers">${L.see}</button></p>`;
+        panel.style.display = "block";
+        $("bCropClose").addEventListener("click", () => { panel.style.display = "none"; openCrop = null; });
+        $("bCropFarmers").addEventListener("click", () => {
+            $("bFarmerCrop").value = name;
+            showBuyerView("farmers");
+        });
+        if (scroll) panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function fillCropFilter() {
+        const s = $("bFarmerCrop");
+        const keep = s.value;
+        s.innerHTML = "";
+        const all = document.createElement("option");
+        all.value = "";
+        all.textContent = bt("All Crops", "అన్ని పంటలు");
+        s.appendChild(all);
+        marketPrices.forEach(m => {
+            const o = document.createElement("option");
+            o.value = m.crop;
+            o.textContent = cn(m.crop);
+            s.appendChild(o);
+        });
+        s.value = keep;
+    }
+
+    function renderFarmersForBuyer() {
+        const tb = $("bFarmersBody");
+        tb.innerHTML = "";
+        const q = $("bFarmerSearch").value.trim().toLowerCase();
+        const cf = $("bFarmerCrop").value;
+        const list = registeredFarmers.filter(f =>
+            (!cf || f.crop === cf || (cf === "Coffee Bean" && f.crop === "Coffee")) &&
+            (!q || [f.name, f.village, f.district].join(" ").toLowerCase().includes(q)));
+        list.forEach(f => {
+            const call = document.createElement("a");
+            call.href = "tel:" + f.phone;
+            call.className = "b-link";
+            call.textContent = f.phone;
+            addRow(tb, [f.name, call, f.village, f.district, cn(f.crop), f.land + " " + bt("Acres", "ఎకరాలు")]);
+        });
+        $("bNoFarmers").style.display = list.length ? "none" : "block";
+    }
+    $("bFarmerSearch").addEventListener("input", renderFarmersForBuyer);
+    $("bFarmerCrop").addEventListener("change", renderFarmersForBuyer);
+
+    function renderTele() {
+        const tb = $("teleBody");
+        tb.innerHTML = "";
+        const k = isTe() ? "te" : "en";
+        teleRequests.forEach(r => addRow(tb, [r.name, r.phone, r.topic[k], r.time[k], r.lang[k],
+            bt("Requested", "అభ్యర్థించబడింది")]));
+        $("noTele").style.display = teleRequests.length ? "none" : "block";
+    }
+
+    function renderVideo() {
+        const tb = $("videoBody");
+        tb.innerHTML = "";
+        const k = isTe() ? "te" : "en";
+        videoRequests.forEach(r => {
+            const a = document.createElement("a");
+            a.href = r.url;
+            a.target = "_blank";
+            a.rel = "noopener";
+            a.className = "b-link";
+            a.textContent = bt("Join Video Call", "వీడియో కాల్‌లో చేరండి");
+            addRow(tb, [r.name, r.instant ? bt("Instant", "తక్షణం") : r.date + " " + r.time, r.topic[k], r.lang[k], a]);
+        });
+        $("noVideo").style.display = videoRequests.length ? "none" : "block";
+    }
+
+
+    function renderRegisteredBuyers() {
+        const body = $("registeredBuyersBody"); body.innerHTML = "";
+        registeredBuyers.forEach(b => addRow(body, [b.name, b.phone, b.village, b.district, b.address]));
+        $("noRegisteredBuyers").style.display = registeredBuyers.length ? "none" : "block";
+    }
+    $("buyerRegistrationForm").addEventListener("submit", e => {
+        e.preventDefault();
+        const name=$("buyerRegName").value.trim(), phone=$("buyerRegPhone").value.trim(), village=$("buyerRegVillage").value.trim(), district=$("buyerRegDistrict").value.trim(), address=$("buyerRegAddress").value.trim();
+        if(!name || !phoneOk(phone) || !village || !district || !address) { $("buyerRegMessage").textContent=bt("Please fill all details correctly.","దయచేసి వివరాలను సరిగ్గా నమోదు చేయండి."); return; }
+        registeredBuyers.push({name,phone,village,district,address}); renderRegisteredBuyers(); e.target.reset();
+        $("buyerRegMessage").textContent=bt("Buyer registered successfully!","కొనుగోలుదారు నమోదు విజయవంతమైంది!");
+    });
+
+    function renderAll() {
+        renderDashboard();
+        renderCrops();
+        renderFarmersForBuyer();
+        renderTele();
+        renderVideo();
+        renderRegisteredBuyers();
+    }
+
+    function applyPlaceholders() {
+        document.querySelectorAll("[data-ph-en]").forEach(el => {
+            el.placeholder = el.getAttribute(isTe() ? "data-ph-te" : "data-ph-en");
+        });
+    }
+
+    /*  tele + video consultation forms  */
+    $("teleForm").addEventListener("submit", e => {
+        e.preventDefault();
+        const name = $("tName").value.trim(), phone = $("tPhone").value.trim();
+        if (!name || !phoneOk(phone) || !$("tTopic").value || !$("tTime").value) {
+            setMsg($("teleMsgBox"), "Please fill all details correctly.", "దయచేసి అన్ని వివరాలను సరిగ్గా పూరించండి.", false);
+            return;
+        }
+        teleRequests.push({ name, phone, topic: selVal($("tTopic")), time: selVal($("tTime")), lang: selVal($("tLang")), message: $("tMsg").value.trim() });
+        $("tTopic").value = ""; $("tTime").value = ""; $("tMsg").value = "";
+        renderTele(); renderDashboard();
+        setMsg($("teleMsgBox"), "Call request submitted. Our expert will contact you at your preferred time.",
+            "కాల్ అభ్యర్థన సమర్పించబడింది. మీరు కోరిన సమయంలో మా నిపుణులు సంప్రదిస్తారు.", true);
+    });
+
+    $("videoForm").addEventListener("submit", e => {
+        e.preventDefault();
+        const name = $("vName").value.trim(), phone = $("vPhone").value.trim();
+        const date = $("vDate").value, time = $("vTime").value;
+        if (!name || !phoneOk(phone) || !date || !time || !$("vTopic").value) {
+            setMsg($("videoMsgBox"), "Please fill all details correctly.", "దయచేసి అన్ని వివరాలను సరిగ్గా పూరించండి.", false);
+            return;
+        }
+        videoRequests.push({ name, phone, date, time, topic: selVal($("vTopic")), lang: selVal($("vLang")), url: newRoomUrl() });
+        $("vDate").value = ""; $("vTime").value = ""; $("vTopic").value = "";
+        renderVideo(); renderDashboard();
+        setMsg($("videoMsgBox"), "Video consultation scheduled. Use the Join link below.",
+            "వీడియో సంప్రదింపు షెడ్యూల్ చేయబడింది. కింద ఉన్న చేరే లింక్‌ను ఉపయోగించండి.", true);
+    });
+
+    $("vInstant").addEventListener("click", () => {
+        const url = newRoomUrl();
+        videoRequests.push({
+            name: "-", phone: "-", instant: true,
+            date: "", time: "", url,
+            topic: { en: "Instant call", te: "తక్షణ కాల్" }, lang: { en: "—", te: "—" }
+        });
+        renderVideo(); renderDashboard();
+        window.open(url, "_blank", "noopener");
+    });
+
+    /*  navigation wiring  */
+    $("coverFarmer").addEventListener("click", openFarmer);
+    $("coverBuyer").addEventListener("click", openBuyer);
+    $("bToCover").addEventListener("click", openCover);
+    $("buyerBackSidebar").addEventListener("click", openCover);
+
+    buyerApp.querySelector(".b-sidebar").addEventListener("click", e => {
+        const a = e.target.closest("a[data-bview]");
+        if (a) { e.preventDefault(); showBuyerView(a.dataset.bview); }
+    });
+    buyerApp.querySelectorAll("[data-bgo]").forEach(btn =>
+        btn.addEventListener("click", () => showBuyerView(btn.dataset.bgo)));
+    $("bToFarmer").addEventListener("click", openFarmer);
+
+    /* chips added to the existing farmer dashboard top bar (next to "Farmer") */
+    const toCover = $("switchToCover");
+    if (toCover) toCover.addEventListener("click", e => { e.preventDefault(); openCover(); });
+
+    /*  language: extend the existing setLanguage  */
+    const originalSetLanguage = window.setLanguage;
+    window.setLanguage = function (language) {
+        originalSetLanguage(language);
+        const label = isTe() ? "English" : "తెలుగు";
+        $("coverLang").textContent = label;
+        $("bLang").textContent = label;
+        applyPlaceholders();
+        if (window.__farmerOpenCrop && $("cropDetailPanel").style.display !== "none") showCropDetails(window.__farmerOpenCrop);
+        fillCropFilter();
+        renderAll();
+        if (openCrop) showBuyerCrop(openCrop, false);
+    };
+    const toggleLang = () => window.setLanguage(currentLanguage === "en" ? "te" : "en");
+    $("coverLang").addEventListener("click", toggleLang);
+    $("bLang").addEventListener("click", toggleLang);
+
+    /*  start on the cover page  */
+    fillCropFilter();
+    applyPlaceholders();
+    renderAll();
+    openCover();
+})();
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
+
